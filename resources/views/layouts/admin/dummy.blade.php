@@ -70,162 +70,297 @@
                 }
             </style>
             <section id="dummy">
-                <div
-                    class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-4 row-cols-md-2 row-cols-sm-2 row-cols-1 g-2 mt-4 mb-4 row-deck res-section justify-content-center">
-                    <div class="col">
-                        <a href="{{ url('/invoice/create') }}">
-                            <div class="card overflow-hidden">
-                                <div class="card-body py-4">
+                <div class="page-body px-xl-4 px-sm-2 px-0 py-lg-2 py-1 mt-0 mt-lg-3">
+                    <div class="section pt-0">
+                        <div class="container-fluid">
+                            <div
+                                class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-4 row-cols-md-2 row-cols-sm-2 row-cols-1 g-2 mb-4 row-deck res-section justify-content-center">
+                                <div class="col">
+                                    <a href="{{ url('invoice') }}">
+                                        <div class="card overflow-hidden">
+                                            <div class="card-body py-4">
 
-                                    <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_edtbqyym.json"
-                                        background="transparent" speed="1" style="width: 300px; height: 300px;" loop
-                                        autoplay></lottie-player>
-                                    {{-- <img class="img-fluid"
-                                    src="{{asset('public')}}/assets/img/restaurant/restaurant-img-2.jpg" alt="Pos">
-                                --}}
+                                                <img class="img-fluid"
+                                                    src="{{ asset('/') }}assets/img/restaurant/restaurant-img-2.jpg"
+                                                    alt="Pos">
+
+                                            </div>
+                                            <div class="card-footer border-0">
+                                                <h5><i class="fa fa-cart-plus"></i> Pos </h5>
+                                                <span class="res-title"> Point of Sale</span>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                                <div class="card-footer border-0">
-                                    <h5><i class="fa fa-cart-plus"></i> Pos </h5>
-                                    <span class="res-title"> Point of Sale</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="{{ url('products') }}">
-                            <div class="card overflow-hidden">
-                                <div class="card-body py-4">
+                                <div class="col">
+                                    @if (Auth::user()->version == 2)
+                                        <a href="{{ url('products/create') }}">
+                                        @else
+                                            <a href="{{ url('v1products/create') }}">
+                                    @endif
+                                    <div class="card overflow-hidden">
+                                        <div class="card-body py-4">
 
-                                    <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_4L6JjAIiVL.json"
-                                        background="transparent" speed="1" style="width: 300px; height: 300px;"
-                                        loop autoplay></lottie-player>
-                                    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-                                    {{-- <img class="img-fluid"
-                                    src="{{asset('public')}}/assets/img/restaurant/restaurant-img-9.jpg" alt="Pos">
-                                --}}
-                                </div>
-                                <div class="card-footer border-0">
+                                            <img class="img-fluid"
+                                                src="{{ asset('/') }}assets/img/restaurant/Food.png" alt="Pos">
 
-                                    <h5 class="text-danger"><i class="fa fa-coffee"></i> Kitchen </h5>
-                                    <span class="res-title"> Kitchen</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                                        </div>
+                                        <div class="card-footer border-0">
 
-                    <div class="col">
-                        <a href="{{ url('ingredients/create') }}">
-                            <div class="card overflow-hidden">
-                                <div class="card-body py-4">
-
-                                    <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_p1bmwqtk.json"
-                                        background="transparent" speed="1" style="width: 300px; height: 300px;"
-                                        loop autoplay></lottie-player>
-                                    {{-- <img class="img-fluid"
-                                    src="{{asset('public')}}/assets/img/restaurant/restaurant-img-2.jpg" alt="Pos">
-                                --}}
-                                </div>
-                                <div class="card-footer border-0">
-                                    <h5><i class="fa fa-cart-plus"></i> ingredients </h5>
-                                    <span class="res-title"> Ingredients </span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-
-                    <div class="col">
-                        <a href="{{ url('purchases') }}">
-                            <div class="card overflow-hidden">
-                                <div class="card-body py-4">
-
-                                    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-                                    <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_skfh9odt.json"
-                                        background="transparent" speed="1" style="width: 300px; height: 300px;"
-                                        loop autoplay></lottie-player>
-                                    {{-- <img class="img-fluid"
-                                    src="{{asset('public')}}/assets/img/restaurant/restaurant-img-6.jpg" alt="Pos">
-                                --}}
-                                </div>
-                                <div class="card-footer border-0">
-                                    <h5 class="text-primary"><i class="fa fa-power-off"></i> Purchase </h5>
-                                    <span class="res-title"> Purchase</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div
-                    class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-4 row-cols-md-2 row-cols-sm-2 row-cols-1 g-2 mt-4 mb-4 row-deck res-section justify-content-center">
-
-                    <div class="col">
-                        <a href="{{ url('stock') }}">
-                            <div class="card overflow-hidden">
-                                <div class="card-body py-4">
-
-
-                                    <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_jrgpo6ko.json"
-                                        background="transparent" speed="1" style="width: 300px; height: 300px;"
-                                        loop autoplay></lottie-player>
-                                    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-                                    {{-- <img class="img-fluid"
-                                    src="{{asset('public')}}/assets/img/restaurant/restaurant-img-9.jpg" alt="Pos">
-                                --}}
-                                </div>
-                                <div class="card-footer border-0">
-
-                                    <h5 class="text-danger"><i class="fa fa-coffee"></i> Inventory </h5>
-                                    <span class="res-title"> Inventory</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="#">
-                            <div class="card overflow-hidden">
-
-                                <div class="card-body py-4">
-
-                                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_hSevJIQ2Wm.json"
-                                        background="transparent" speed="1" style="width: 300px; height: 300px;"
-                                        loop autoplay></lottie-player>
-                                    {{-- <img class="img-fluid"
-                                    src="{{asset('public')}}/assets/img/restaurant/restaurant-img-7.jpg" alt="Pos">
-                                --}}
-                                </div>
-                                <div class="card-footer border-0">
-                                    <h5 class="text-success"><i class="fa fa-clock-o"></i> Reports </h5>
-                                    <span class="res-title"> Reports</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-
-
-                    <div class="col">
-
-                        <a href="#">
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <div class="card overflow-hidden">
-                                    <div class="card-body py-4">
-
-                                        <lottie-player
-                                            src="https://assets1.lottiefiles.com/datafiles/xjFX0JCCOm2Lhp1/data.json"
-                                            background="transparent" speed="1" style="width: 300px; height: 300px;"
-                                            loop autoplay></lottie-player>
-                                        {{-- <img class="img-fluid"
-                                    src="{{asset('public')}}/assets/img/restaurant/restaurant-img-6.jpg" alt="Pos">
-                                --}}
+                                            <h5 class="text-danger"><i class="fa fa-coffee"></i> Foods </h5>
+                                            <span class="res-title"> Foods </span>
+                                        </div>
                                     </div>
-                                    <div class="card-footer border-0">
-                                        <h5 class="text-primary"><i class="fa fa-power-off"></i> Logout </h5>
-                                        <span class="res-title"> Logout</span>
-                                    </div>
+                                    </a>
                                 </div>
-                            </form>
-                        </a>
+                                <div class="col">
+                                    <a href="{{ url('product-category/create') }}">
+                                        <div class="card overflow-hidden">
+                                            <div class="card-body py-4">
+                                                <img class="img-fluid"
+                                                    src="{{ asset('/') }}assets/img/restaurant/FoodCategory.png"
+                                                    alt="Pos">
+
+                                            </div>
+                                            <div class="card-footer border-0">
+
+                                                <h5 class="text-primary-emphasis"><i class="fa fa-cutlery"></i> Food
+                                                    Category
+                                                </h5>
+                                                <span class="res-title"> Food Category </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                @if (Auth::user()->version == 2)
+                                    <div class="col">
+                                        <a href="{{ url('ingredients/create') }}">
+                                            <div class="card overflow-hidden">
+                                                <div class="card-body py-4">
+                                                    <img class="img-fluid"
+                                                        src="{{ asset('/') }}assets/img/restaurant/restaurant-img-10.jpg"
+                                                        alt="Pos">
+
+                                                </div>
+                                                <div class="card-footer border-0">
+
+                                                    <h5 class="text-primary-emphasis"><i class="fa fa-cutlery"></i>
+                                                        Ingredients
+                                                    </h5>
+                                                    <span class="res-title"> Ingredients</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endif
+
+                                <div class="col">
+                                    <a href="{{ url('purchases/create') }}">
+                                        <div class="card overflow-hidden">
+
+                                            <div class="card-body py-4">
+                                                <img class="img-fluid"
+                                                    src="{{ asset('/') }}assets/img/restaurant/Purchase.png"
+                                                    alt="Pos">
+
+                                            </div>
+                                            <div class="card-footer border-0">
+                                                <h5 class="text-success"><i class="fa fa-clock-o"></i> Purchase </h5>
+                                                <span class="res-title"> Purchase</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a href="{{ url('report/profit-loss') }}">
+                                        <div class="card overflow-hidden">
+                                            <div class="card-body py-4">
+                                                <img class="img-fluid"
+                                                    src="{{ asset('/') }}assets/img/restaurant/Inventory.png"
+                                                    alt="Pos">
+
+                                            </div>
+                                            <div class="card-footer border-0">
+                                                <h5 class="text-primary"><i class="fa fa-file-text-o"></i> Inventory
+                                                </h5>
+                                                <span class="res-title"> Inventory</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a href="{{ url('warehouse-branch-transfer/create') }}">
+                                        <div class="card overflow-hidden">
+                                            <div class="card-body py-4">
+                                                <img class="img-fluid"
+                                                    src="{{ asset('/') }}assets/img/restaurant/Transfer.png"
+                                                    alt="Pos">
+
+                                            </div>
+                                            <div class="card-footer border-0">
+                                                <h5 class="text-success-emphasis"><i class="fa fa-file-text-o"></i>
+                                                    Transfer
+                                                </h5>
+                                                <span class="res-title"> Transfer</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                {{-- <div class="col">
+                                    <a href="#">
+                                        <div class="card overflow-hidden">
+                                            <div class="card-body py-4">
+                                                <img class="img-fluid"
+                                                    src="{{ asset('/') }}assets/img/restaurant/Reports.png"
+                                                    alt="Pos">
+
+                                            </div>
+                                            <div class="card-footer border-0">
+                                                <h5 class="text-danger-emphasis"><i class="fa fa-file-text-o"></i>
+                                                    Reports </h5>
+                                                <span class="res-title"> Reports</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div> --}}
+                                <div class="col">
+                                    <a href="{{ url('restaurant-table/create') }}">
+                                        <div class="card overflow-hidden">
+                                            <div class="card-body py-4">
+                                                <img class="img-fluid"
+                                                    src="{{ asset('/') }}assets/img/restaurant/Restaurant-Tables.png"
+                                                    alt="Pos">
+
+                                            </div>
+                                            <div class="card-footer border-0">
+                                                <h5 class="text-warning"><i class="fa fa-table"></i> Restaurant Tables
+                                                </h5>
+                                                <span class="res-title"> Restaurant Tables</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a href="{{ url('branch/create') }}">
+                                        <div class="card overflow-hidden">
+                                            <div class="card-body py-4">
+                                                <img class="img-fluid"
+                                                    src="{{ asset('/') }}assets/img/restaurant/branches.jpg"
+                                                    alt="Pos">
+
+                                            </div>
+                                            <div class="card-footer border-0">
+                                                <h5 class="text-warning-emphasis"><i class="fa fa-code-fork"></i>
+                                                    Branches
+                                                </h5>
+                                                <span class="res-title"> Branches</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                {{-- <div class="col">
+                                    <a href="#">
+                                        <div class="card overflow-hidden">
+                                            <div class="card-body py-4">
+                                                <img class="img-fluid"
+                                                    src="{{ asset('/') }}assets/img/restaurant/Back-Date-Entry.jpg"
+                                                    alt="Pos">
+
+                                            </div>
+                                            <div class="card-footer border-0">
+                                                <h5 class="text-info"><i class="fa fa-calendar"></i> Back Date Entry
+                                                </h5>
+                                                <span class="res-title"> Back Date Entry</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div> --}}
+                                <div class="col">
+                                    <a href="{{ url('suppliers/create') }}">
+                                        <div class="card overflow-hidden">
+                                            <div class="card-body py-4">
+                                                <img class="img-fluid"
+                                                    src="{{ asset('/') }}assets/img/restaurant/suppliers.png"
+                                                    alt="Pos">
+
+                                            </div>
+                                            <div class="card-footer border-0">
+                                                <h5 class="text-info-emphasis"><i class="fa fa-user"></i> Suppliers
+                                                </h5>
+                                                <span class="res-title"> Suppliers</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                {{-- <div class="col">
+                                    <a href="#">
+                                        <div class="card overflow-hidden">
+                                            <div class="card-body py-4">
+                                                <img class="img-fluid"
+                                                    src="{{ asset('/') }}assets/img/restaurant/transaction.jpg"
+                                                    alt="Pos">
+
+                                            </div>
+                                            <div class="card-footer border-0">
+                                                <h5 class="text-primary"><i class="fa fa-credit-card"></i> Transaction
+                                                </h5>
+                                                <span class="res-title"> Transaction </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div> --}}
+                                <div class="col">
+                                    <a href="{{ url('warehouse/create') }}">
+                                        <div class="card overflow-hidden">
+                                            <div class="card-body py-4">
+                                                <img class="img-fluid"
+                                                    src="{{ asset('/') }}assets/img/restaurant/warehouse.png"
+                                                    alt="Pos">
+
+                                            </div>
+                                            <div class="card-footer border-0">
+                                                <h5 class="text-primary"><i class="fa fa-building"></i> Warehouse
+                                                </h5>
+                                                <span class="res-title"> Warehouse </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a href="{{ url('accounts/create') }}">
+                                        <div class="card overflow-hidden">
+                                            <div class="card-body py-4">
+                                                <img class="img-fluid"
+                                                    src="{{ asset('/') }}assets/img/restaurant/accounting.png"
+                                                    alt="Pos">
+
+                                            </div>
+                                            <div class="card-footer border-0">
+                                                <h5 class="text-primary"><i class="fa fa-calculator"></i> Accounts
+                                                </h5>
+                                                <span class="res-title"> Accounts </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a href="#">
+                                        <div class="card overflow-hidden">
+                                            <div class="card-body py-4">
+                                                <img class="img-fluid"
+                                                    src="{{ asset('/') }}assets/img/restaurant/restaurant-img-6.jpg"
+                                                    alt="Pos">
+
+                                            </div>
+                                            <div class="card-footer border-0">
+                                                <h5 class="text-primary"><i class="fa fa-power-off"></i> Logout </h5>
+                                                <span class="res-title"> Logout</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

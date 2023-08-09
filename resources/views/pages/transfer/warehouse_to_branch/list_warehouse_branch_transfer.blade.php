@@ -1,6 +1,6 @@
 @extends('home')
 @section('content')
-<!-- Form section -->
+    <!-- Form section -->
     <!-- start: page toolbar -->
     <div class="page-toolbar px-xl-4 px-sm-2 px-0 py-3">
         <div class="container">
@@ -13,7 +13,8 @@
                     </ol>
                 </div>
                 <div class="col text-md-end">
-                    <a class="btn btn-primary" href="{{ url('warehouse-branch-transfer/create') }}"><i class="fa fa-list me-2"></i>Create
+                    <a class="btn btn-primary" href="{{ url('warehouse-branch-transfer/create') }}"><i
+                            class="fa fa-list me-2"></i>Create
                         Transfer</a>
                     {{-- <a class="btn btn-secondary" href="{{ 'agents/create' }}"><i class="fa fa-user me-2"></i>Create
                         Agent</a> --}}
@@ -39,7 +40,7 @@
                                     <th>Transfer Date</th>
                                     <th>From (Warehouse)</th>
                                     <th>To (Branch)</th>
-                                    <th>Total Quantity</th>
+                                    {{-- <th>Total Quantity</th> --}}
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -51,12 +52,12 @@
                                         <td>{{ $transfer->transfer_date }}</td>
                                         <td>{{ $transfer->warehouse_name }}</td>
                                         <td>{{ $transfer->branch_name }}</td>
-                                        <td>{{ $transfer->total_transfer_quantity }}</td>
+                                        {{-- <td>{{ $transfer->total_transfer_quantity }}</td> --}}
                                         <td>
-                                            <a href="{{ 'warehouse-branch-transfer/' . $transfer->warehouse_to_branch_transfer_id . '/' . 'edit' }}"
+                                            {{-- <a href="{{ 'warehouse-branch-transfer/' . $transfer->warehouse_to_branch_transfer_id . '/' . 'edit' }}"
                                                 class="btn btn-sm btn-warning">Edit</a>
                                             <button class="btn btn-sm btn-danger"
-                                                onclick="deleteNow({{ $transfer->warehouse_to_branch_transfer_id }})">Delete</button>
+                                                onclick="deleteNow({{ $transfer->warehouse_to_branch_transfer_id }})">Delete</button> --}}
                                             <a href="{{ 'warehouse-branch-transfer/' . $transfer->warehouse_to_branch_transfer_id }}"
                                                 class="btn btn-sm btn-info">View</a>
                                         </td>
@@ -75,47 +76,44 @@
 
 
     <script type="text/javascript">
+        function deleteNow(params) {
 
-function deleteNow(params) {
+            var isConfirm = confirm('Are You Sure!');
+            if (isConfirm) {
 
-var isConfirm = confirm('Are You Sure!');
-if (isConfirm) {
+                $('.loader').show();
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'DELETE',
+                    url: "warehouse-branch-transfer" + '/' + params,
+                    success: function(data) {
+                        location.reload();
 
-$('.loader').show();
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            type: 'DELETE',
-            url: "warehouse-branch-transfer" + '/' + params,
-            success: function(data) {
-                location.reload();
-
+                    }
+                }).done(function() {
+                    $("#success_msg").html("Data Save Successfully");
+                    //window.location.href = "{{ url('users') }}/";
+                    Swal.fire('Transfer Has Been Deleted', '', 'success')
+                }).fail(function(data, textStatus, jqXHR) {
+                    $('.loader').hide();
+                    var json_data = JSON.parse(data.responseText);
+                    $.each(json_data.errors, function(key, value) {
+                        $("#" + key).after(
+                            "<span class='error_msg' style='color: red;font-weigh: 600'>" +
+                            value +
+                            "</span>");
+                    });
+                });
+            } else {
+                $('.loader').hide();
             }
-        }).done(function() {
-            $("#success_msg").html("Data Save Successfully");
-            //window.location.href = "{{ url('users') }}/";
-            Swal.fire('Transfer Has Been Deleted', '', 'success')
-        }).fail(function(data, textStatus, jqXHR) {
-            $('.loader').hide();
-            var json_data = JSON.parse(data.responseText);
-            $.each(json_data.errors, function(key, value) {
-                $("#" + key).after(
-                    "<span class='error_msg' style='color: red;font-weigh: 600'>" +
-                    value +
-                    "</span>");
-            });
-        });
-} else {
-$('.loader').hide();
-}
 
 
 
 
-// })
-}
-
-
+            // })
+        }
     </script>
 @endsection

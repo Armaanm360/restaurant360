@@ -1,0 +1,3642 @@
+{
+	"info": {
+		"_postman_id": "2373c899-9c03-4d71-8d9e-7600b47ed974",
+		"name": "Building 360",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24403861",
+		"_collection_link": "https://blue-satellite-573630.postman.co/workspace/My-Workspace~fc684072-181c-464f-8bc1-8cea2d999dc8/collection/24403861-2373c899-9c03-4d71-8d9e-7600b47ed974?action=share&creator=24403861&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Credentials",
+			"item": [
+				{
+					"name": "Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "nafjkfa",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "9atmsppooo6547ooolish@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "01521326072feaeffe",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "RENTEE",
+									"type": "text"
+								},
+								{
+									"key": "logged_in_owner",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://192.168.0.227/building-360/api/registration",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"227"
+							],
+							"path": [
+								"building-360",
+								"api",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "rentee_nazmul_priyangon@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://building360.world/api/new-login",
+							"protocol": "https",
+							"host": [
+								"building360",
+								"world"
+							],
+							"path": [
+								"api",
+								"new-login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoice",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"invoice_type\":\"ASSOCIATION\",\r\n    \"created_by\":197,\r\n    \"invoice_no\":\"1739927978\",\r\n    \"building_id\":17,\r\n    \"hidden_flat_owner_id\":165,\r\n    \"invoice_date\":\"10/12/24\",\r\n    \"invoice_subtotal\":251,\r\n    \"grand_total\":251,\r\n    \"updated_at\":\"2023-03-06 10:15:01\",\r\n    \"billing_rows\":[1],\r\n    \"billing_item_id_1\":44,\r\n    \"billing_description_1\":\"kisu na\",\r\n    \"billing_month_1\":1,\r\n    \"billing_charge_1\":250,\r\n    \"billing_extras_1\":1,\r\n    \"billing_quantity_1\":1,\r\n    \"billing_total_1\":251\r\n}\r\n\r\n\r\n\r\n   \r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/invoice",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"invoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invoice User Wise",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/flat-owner-wise-rentee/181",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"flat-owner-wise-rentee",
+								"181"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Of Invoices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://building360.world/api/invoice/user-wise-money-unpaid-reciepts/RENTEE/181",
+							"protocol": "https",
+							"host": [
+								"building360",
+								"world"
+							],
+							"path": [
+								"api",
+								"invoice",
+								"user-wise-money-unpaid-reciepts",
+								"RENTEE",
+								"181"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Invoice Id Wise",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/invoice/181",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"invoice",
+								"181"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Invoice",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/invoice/152",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"invoice",
+								"152"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Flat Owner Wise Rentee",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.0.227/building-360/api/flat-owner-wise-rentee/165/priyangon_unique_7896456_ID",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"227"
+							],
+							"path": [
+								"building-360",
+								"api",
+								"flat-owner-wise-rentee",
+								"165",
+								"priyangon_unique_7896456_ID"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Association Wise Flat Owner",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/association-wise-flat_owner/priyangon_unique_7896456_ID",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"association-wise-flat_owner",
+								"priyangon_unique_7896456_ID"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "money reciept invoice user wise",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/invoice-money-reciept-user-wise/FLAT_OWNER/165",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"invoice-money-reciept-user-wise",
+								"FLAT_OWNER",
+								"165"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://building360.world/api/invoice/user-wise-money-unpaid-reciepts/RENTEE/181",
+							"protocol": "https",
+							"host": [
+								"building360",
+								"world"
+							],
+							"path": [
+								"api",
+								"invoice",
+								"user-wise-money-unpaid-reciepts",
+								"RENTEE",
+								"181"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Money Reciept",
+			"item": [
+				{
+					"name": "List Of Reciepts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/money-receipt/money-rec-creator-wise/159",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"money-receipt",
+								"money-rec-creator-wise",
+								"159"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Money Reciept",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "created_by",
+									"value": "158",
+									"type": "text"
+								},
+								{
+									"key": "money_receipt_amount",
+									"value": "4000",
+									"type": "text"
+								},
+								{
+									"key": "money_receipt_discount",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "hidden_flat_owner_id",
+									"value": "158",
+									"type": "text"
+								},
+								{
+									"key": "invoice_id",
+									"value": "113",
+									"type": "text"
+								},
+								{
+									"key": "grand_total",
+									"value": "4000",
+									"type": "text"
+								},
+								{
+									"key": "money_receipt_account_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "money_receipt_date",
+									"value": "4-10-23",
+									"type": "text"
+								},
+								{
+									"key": "money_receipt_voucher_no",
+									"value": "fa2fa15fa1f15af",
+									"description": "generated no\n.",
+									"type": "text"
+								},
+								{
+									"key": "money_receipt_invoice_no",
+									"value": "63244546",
+									"type": "text"
+								},
+								{
+									"key": "money_receipt_note",
+									"value": "this is from here",
+									"type": "text"
+								},
+								{
+									"key": "payment_method",
+									"value": "bank",
+									"description": "bank or cheque",
+									"type": "text"
+								},
+								{
+									"key": "withdraw_date",
+									"value": "4-10-23",
+									"type": "text"
+								},
+								{
+									"key": "cheque_number",
+									"value": "",
+									"description": "if type = cheque",
+									"type": "text"
+								},
+								{
+									"key": "payment_method",
+									"value": "bank",
+									"description": "cheque/bank",
+									"type": "text"
+								},
+								{
+									"key": "money_receipt_rentee_id",
+									"value": "181",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "RENTEE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/money-receipt",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"money-receipt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "paid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/money-receipt/user-wise-money-reciepts/ASSOCIATION/197",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"money-receipt",
+								"user-wise-money-reciepts",
+								"ASSOCIATION",
+								"197"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unpaid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/invoice/user-wise-money-unpaid-reciepts/RENTEE/166",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"invoice",
+								"user-wise-money-unpaid-reciepts",
+								"RENTEE",
+								"166"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unpaid Flat Owner",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/invoice/user-wise-money-unpaid-reciepts/FLAT_OWNER/165",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"invoice",
+								"user-wise-money-unpaid-reciepts",
+								"FLAT_OWNER",
+								"165"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/invoice/user-wise-money-flat-owner_paid/ASSOCIATION/197",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"invoice",
+								"user-wise-money-flat-owner_paid",
+								"ASSOCIATION",
+								"197"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "List of accounts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/accounts?account_created_by=priyangon_unique_7896456_ID",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"accounts"
+							],
+							"query": [
+								{
+									"key": "account_created_by",
+									"value": "priyangon_unique_7896456_ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "account_name",
+									"value": "Estern Bank Limitedfeaefafe",
+									"type": "text"
+								},
+								{
+									"key": "account_number",
+									"value": "98745698714",
+									"type": "text"
+								},
+								{
+									"key": "account_type",
+									"value": "BANK",
+									"type": "text"
+								},
+								{
+									"key": "account_bank_name",
+									"value": "EBLafeeffe",
+									"type": "text"
+								},
+								{
+									"key": "account_branch_name",
+									"value": "motifjheel",
+									"type": "text"
+								},
+								{
+									"key": "account_created_by",
+									"value": "priyangon_unique_7896456_ID",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/accounts",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Account",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"account_name\": \"esternnn\",\r\n        \"account_number\": \"100200300\",\r\n        \"account_type\": \"BANK\",\r\n        \"account_bank_name\": \"EsternBank\",\r\n        \"account_branch_name\": \"Gulshan\",\r\n        \"account_status\": 1,\r\n        \"account_create_date\": \"2023-03-12\",\r\n        \"updated_at\": \"2023-03-12T10:35:41.000000Z\",\r\n        \"created_at\": \"2023-03-12T10:35:41.000000Z\",\r\n        \"id\": 16\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/accounts/16",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Account",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/accounts/16",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/accounts/save-opening-balance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"save-opening-balance"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Configuration",
+			"item": [
+				{
+					"name": "Flat",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "flat_no",
+											"value": "47",
+											"type": "text"
+										},
+										{
+											"key": "owner_id",
+											"value": "198",
+											"type": "text"
+										},
+										{
+											"key": "entry_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "floor_no",
+											"value": "5496",
+											"type": "text"
+										},
+										{
+											"key": "house_no",
+											"value": "45",
+											"type": "text"
+										},
+										{
+											"key": "road_no",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "ok",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "ACTIVE",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}api/flat",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"flat"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}api/flat?unique_user_id=priyangon_unique_7896456_ID",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"flat"
+									],
+									"query": [
+										{
+											"key": "unique_user_id",
+											"value": "priyangon_unique_7896456_ID"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/flat/6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"flat",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Flat",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/flat/11?flat_no=F8&owner_id=6546465&entry_id=1&floor_no=5496&house_no=45&road_no=1&description=ok&status=ACTIVE",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"flat",
+										"11"
+									],
+									"query": [
+										{
+											"key": "flat_no",
+											"value": "F8"
+										},
+										{
+											"key": "owner_id",
+											"value": "6546465"
+										},
+										{
+											"key": "entry_id",
+											"value": "1"
+										},
+										{
+											"key": "floor_no",
+											"value": "5496"
+										},
+										{
+											"key": "house_no",
+											"value": "45"
+										},
+										{
+											"key": "road_no",
+											"value": "1"
+										},
+										{
+											"key": "description",
+											"value": "ok"
+										},
+										{
+											"key": "status",
+											"value": "ACTIVE"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Of Flat Owners",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/only-flat-owners",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"only-flat-owners"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Building",
+					"item": [
+						{
+							"name": "Add Building",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "building_name",
+											"value": "1051",
+											"type": "text"
+										},
+										{
+											"key": "building_created_by",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/building",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"building"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List of Buildings",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/building",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"building"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Building",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/building/8",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"building",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Building",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/building/4",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"building",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Building-Wise-Info",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/building-wise-info/7",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"building-wise-info",
+										"7"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Employee",
+					"item": [
+						{
+							"name": "Add Employee",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "employee_name",
+											"value": "shadin",
+											"type": "text"
+										},
+										{
+											"key": "employee_phone",
+											"value": "015213285742",
+											"type": "text"
+										},
+										{
+											"key": "employee_email",
+											"value": "ashasd@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "employee_password",
+											"value": "12345678",
+											"type": "text"
+										},
+										{
+											"key": "employee_role",
+											"value": "3",
+											"description": "always (3)",
+											"type": "text"
+										},
+										{
+											"key": "employee_status",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "employee_created_by",
+											"value": "197",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}api/employee",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"employee"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List of Employee",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}api/employee?unique_user_id=priyangon_unique_7896456_ID",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"employee"
+									],
+									"query": [
+										{
+											"key": "unique_user_id",
+											"value": "priyangon_unique_7896456_ID"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Employee View",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/employee/7",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"employee",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Employee",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"employee_name\":\"irasashad\",\r\n    \"employee_email\":\"rasashad@gmail.com\",\r\n    \"employee_password\":12345678,\r\n    \"employee_phone\":\"001521328574\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/employee/7",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"employee",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Employee",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/employee/4",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"employee",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Payroll Expense Items",
+					"item": [
+						{
+							"name": "Add Payroll Expense Items",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/payroll-expense-items",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"payroll-expense-items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Payroll Expense Items",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/payroll-expense-items?payroll_expense_name=creapfeaf",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"payroll-expense-items"
+									],
+									"query": [
+										{
+											"key": "payroll_expense_name",
+											"value": "creapfeaf"
+										},
+										{
+											"key": "payroll_expense_slug",
+											"value": "50",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Payroll Expense Items",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"payroll_expense_name\":\"phone damn pro\",\r\n    \"payroll_expense_slug\":\"phone damn pro\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/payroll-expense-items/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"payroll-expense-items",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Payroll Expense",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/payroll-expense-items/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"payroll-expense-items",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Expense Heads",
+					"item": [
+						{
+							"name": "Create Expense Head",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "vegetablesfea",
+											"type": "text"
+										},
+										{
+											"key": "created_by",
+											"value": "197",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}api/expense-head",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"expense-head"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Of Expense Head",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}api/expense-head?unique_user_id=priyangon_unique_7896456_ID",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"expense-head"
+									],
+									"query": [
+										{
+											"key": "unique_user_id",
+											"value": "priyangon_unique_7896456_ID"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Expense Head",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"murgi khabo\",\r\n    \"created_by\":7,\r\n    \"updated_by\":7\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/expense-head/5",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"expense-head",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Expense Head",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/expense-head/9",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"expense-head",
+										"9"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Expense Sub Head",
+					"item": [
+						{
+							"name": "Create Expense Sub Head",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "sub_title",
+											"value": "another sub",
+											"type": "text"
+										},
+										{
+											"key": "expense_head_id",
+											"value": "23",
+											"type": "text"
+										},
+										{
+											"key": "created_by",
+											"value": "197",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "1",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}api/expense-sub-head",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"expense-sub-head"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Of Expense Sub Head",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}api/expense-sub-head?unique_user_id=priyangon_unique_7896456_ID",
+									"host": [
+										"{{baseUrl}}api"
+									],
+									"path": [
+										"expense-sub-head"
+									],
+									"query": [
+										{
+											"key": "unique_user_id",
+											"value": "priyangon_unique_7896456_ID"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Expense Sub Head",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"title\":\"meow khabo\",\r\n   \"expense_head_id\":5,\r\n   \"updated_by\":7\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/expense-sub-head/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"expense-sub-head",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Expense Head",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/expense-sub-head/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"expense-sub-head",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Payroll",
+			"item": [
+				{
+					"name": "Create Payroll Expense",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "payroll_employee_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "payroll_account_method",
+									"value": "BANK",
+									"type": "text"
+								},
+								{
+									"key": "salary",
+									"value": "45000",
+									"type": "text"
+								},
+								{
+									"key": "deduction",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "deduction_reason",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "payroll_account_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "mobile_bill",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "food_bill",
+									"value": "400",
+									"type": "text"
+								},
+								{
+									"key": "bonus",
+									"value": "500",
+									"type": "text"
+								},
+								{
+									"key": "commision",
+									"value": "600",
+									"type": "text"
+								},
+								{
+									"key": "festifal_bonus",
+									"value": "700",
+									"type": "text"
+								},
+								{
+									"key": "TA",
+									"value": "800",
+									"type": "text"
+								},
+								{
+									"key": "Advance",
+									"value": "900",
+									"type": "text"
+								},
+								{
+									"key": "payroll_date",
+									"value": "2023-04-05",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/payroll",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"payroll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Payroll",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/payroll/16",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"payroll",
+								"16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Of Payroll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/payroll",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"payroll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit payroll",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/payroll/16",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"payroll",
+								"16"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Billing Items",
+			"item": [
+				{
+					"name": "List of Billing Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/billing-items?flat_owner_id=162",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"billing-items"
+							],
+							"query": [
+								{
+									"key": "flat_owner_id",
+									"value": "162"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Billing Items",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/billing-items?billing_item_name=Turfa&billing_item_charge=3000&billing_item_show_in_invoice=YES&user_type=FLAT_OWNERS&flat_owner_id=162",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"billing-items"
+							],
+							"query": [
+								{
+									"key": "billing_item_name",
+									"value": "Turfa"
+								},
+								{
+									"key": "billing_item_charge",
+									"value": "3000"
+								},
+								{
+									"key": "billing_item_show_in_invoice",
+									"value": "YES"
+								},
+								{
+									"key": "user_type",
+									"value": "FLAT_OWNERS"
+								},
+								{
+									"key": "flat_owner_id",
+									"value": "162"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "       {\r\n        \"billing_item_name\": \"Gas Bill\",\r\n        \"billing_item_charge\": \"1850\",\r\n        \"billing_item_show_in_invoice\": \"YES\",\r\n        \"status\": 1\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/billing-items/7",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"billing-items",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/billing-items/6",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"billing-items",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Common API",
+			"item": [
+				{
+					"name": "Get Invoice Information By Invoice ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/get-invoice-full-information?q=7",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"get-invoice-full-information"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Flat Owner Wise list of invoice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/search-flat-owner-wise-invoice?q=7",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"search-flat-owner-wise-invoice"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Flat Owner name search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/flat-owner-name-search?q=Shahed",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"flat-owner-name-search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "Shahed"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Flat Owners",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/flat-owners",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"flat-owners"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "List  Of Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/user-list-type-wise/165",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user-list-type-wise",
+								"165"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/158",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"158"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/user-list-type-wise/FLAT_OWNER/165/priyangon_unique_7896456_ID",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"user-list-type-wise",
+								"FLAT_OWNER",
+								"165",
+								"priyangon_unique_7896456_ID"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account Transfer",
+			"item": [
+				{
+					"name": "list of account transfer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/account-transfer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"account-transfer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Account Transfer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "account_from",
+									"value": "14",
+									"type": "text"
+								},
+								{
+									"key": "account_to",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "account_transaction_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "44",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2023-01-04",
+									"type": "text"
+								},
+								{
+									"key": "note",
+									"value": "kisu na",
+									"type": "text"
+								},
+								{
+									"key": "created_by",
+									"value": "7",
+									"type": "text"
+								},
+								{
+									"key": "deleted_by",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/account-transfer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"account-transfer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Balance Statement",
+			"item": [
+				{
+					"name": "List Balance Statement",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/account/balance-statement",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"balance-statement"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Non Invoice Income",
+			"item": [
+				{
+					"name": "Create Non Invoice Income",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/account/balance-statement?non_invoice_client_id=0&non_invoice_account_id=11&non_invoice_account_transaction_id=119&non_invoice_client_transaction_id=71&non_invoice_amount=66&non_invoice_date=2023-02-31&non_invoice_note=nai kisue&non_invoice_created_by=7",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"balance-statement"
+							],
+							"query": [
+								{
+									"key": "non_invoice_client_id",
+									"value": "0"
+								},
+								{
+									"key": "non_invoice_account_id",
+									"value": "11"
+								},
+								{
+									"key": "non_invoice_account_transaction_id",
+									"value": "119"
+								},
+								{
+									"key": "non_invoice_client_transaction_id",
+									"value": "71"
+								},
+								{
+									"key": "non_invoice_amount",
+									"value": "66"
+								},
+								{
+									"key": "non_invoice_date",
+									"value": "2023-02-31"
+								},
+								{
+									"key": "non_invoice_note",
+									"value": "nai kisue"
+								},
+								{
+									"key": "non_invoice_created_by",
+									"value": "7"
+								},
+								{
+									"key": "non_invoice_updated_by",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "Create New Role",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"lal\",\r\n    \"permissions\":[3,5]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/roles",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List of Roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/roles",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Role",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \"name\":\"lal\",\r\n    \"permissions\":[3,5,6,4]}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/roles/12",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"roles",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Role",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/roles/12",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"roles",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Permissions",
+			"item": [
+				{
+					"name": "Create New Permission",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"section_name\":\"Lonima\",\r\n    \"name\":[\"add\",\"delete\",\"edit\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/permissions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List of Permission",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/permissions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Permission",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"section_name\":\"Lonimanjii\",\r\n    \"name\":[\"add\",\"delete\",\"edit\",\"view\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/permissions/12",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"permissions",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Permission",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/permissions/15",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"permissions",
+								"15"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Expenses",
+			"item": [
+				{
+					"name": "Create Expense",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "expense_head_id",
+									"value": "9",
+									"type": "text"
+								},
+								{
+									"key": "expense_sub_head_id",
+									"value": "23",
+									"type": "text"
+								},
+								{
+									"key": "expense_account",
+									"value": "11",
+									"type": "text"
+								},
+								{
+									"key": "created_by",
+									"value": "197",
+									"type": "text"
+								},
+								{
+									"key": "expense_amount",
+									"value": "245",
+									"type": "text"
+								},
+								{
+									"key": "expense_date",
+									"value": "13-02-23",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/expenses",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"expenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Of Expenses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/expenses?unique_user_id=priyangon_unique_7896456_ID",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"expenses"
+							],
+							"query": [
+								{
+									"key": "unique_user_id",
+									"value": "priyangon_unique_7896456_ID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Money Reciept",
+			"item": [
+				{
+					"name": "Edit Money Reciept",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "created_by",
+									"value": "152",
+									"type": "text"
+								},
+								{
+									"key": "money_receipt_amount",
+									"value": "250",
+									"type": "text"
+								},
+								{
+									"key": "money_receipt_discount",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "RENTEE",
+									"type": "text"
+								},
+								{
+									"key": "hidden_flat_owner_id",
+									"value": "152",
+									"type": "text"
+								},
+								{
+									"key": "invoice_id",
+									"value": "7",
+									"type": "text"
+								},
+								{
+									"key": "money_receipt_date",
+									"value": "2022-12-26",
+									"type": "text"
+								},
+								{
+									"key": "money_receipt_account_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "grand_total",
+									"value": "300",
+									"type": "text"
+								},
+								{
+									"key": "money_receipt_voucher_no",
+									"value": "11",
+									"type": "text"
+								},
+								{
+									"key": "money_receipt_invoice_no",
+									"value": "22561515",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/money-receipt/28",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"money-receipt",
+								"28"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notice",
+			"item": [
+				{
+					"name": "All Notice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.0.227/building-360/api/real-time-notice",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"227"
+							],
+							"path": [
+								"building-360",
+								"api",
+								"real-time-notice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Notice",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "notice_title",
+									"value": "4fa7af41",
+									"type": "text"
+								},
+								{
+									"key": "notice_body",
+									"value": "41fa85af15fa1afwertyuio",
+									"type": "text"
+								},
+								{
+									"key": "notice_created_by",
+									"value": "162",
+									"type": "text"
+								},
+								{
+									"key": "noticed_created_for",
+									"value": "FLAT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/real-time-notice-post",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"real-time-notice-post"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment",
+			"item": [
+				{
+					"name": "list of payment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/flat-owner-payment",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"flat-owner-payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "make payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "amount",
+									"value": "150",
+									"type": "text"
+								},
+								{
+									"key": "invoice_id",
+									"value": "768180247",
+									"type": "text"
+								},
+								{
+									"key": "flat_owner_id",
+									"value": "163",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/flat-owner-payment",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"flat-owner-payment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "Expense Report",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/expense-report?start_date=2023-05-08&end_date=2023-05-10",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"expense-report"
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2023-05-08"
+								},
+								{
+									"key": "end_date",
+									"value": "2023-05-10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invoice Report",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/invoice-report?start_date=2023-06-05&end_date=2023-07-07&invoiceType=ASSOCIATION&invoiceStatus=PAID",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"invoice-report"
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2023-06-05"
+								},
+								{
+									"key": "end_date",
+									"value": "2023-07-07"
+								},
+								{
+									"key": "invoiceType",
+									"value": "ASSOCIATION"
+								},
+								{
+									"key": "invoiceStatus",
+									"value": "PAID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Payroll Report",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/payroll-report?start_date=2023-04-05&end_date=2023-04-05",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"payroll-report"
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2023-04-05"
+								},
+								{
+									"key": "end_date",
+									"value": "2023-04-05"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "Dahsboard",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle",
+			"item": [
+				{
+					"name": "Vehicle Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "vin",
+									"value": "1GCHK29U3YE127786",
+									"description": "1GCHK29U3YE123456 kind of this",
+									"type": "text"
+								},
+								{
+									"key": "make_and_model",
+									"value": "Audi",
+									"description": "Car/Bike Name",
+									"type": "text"
+								},
+								{
+									"key": "license_plate_number",
+									"value": "DHAKA-D-11-4265",
+									"type": "text"
+								},
+								{
+									"key": "vehicle_type",
+									"value": "Car",
+									"description": "Car,Truck,Van,Motorcycle",
+									"type": "text"
+								},
+								{
+									"key": "year_of_manufacture",
+									"value": "1971",
+									"description": "year",
+									"type": "text"
+								},
+								{
+									"key": "fuel_type",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "vehicle_status",
+									"value": "OK",
+									"description": "OK,U/A",
+									"type": "text"
+								},
+								{
+									"key": "insurance_information",
+									"value": "Some Text For insurance info",
+									"description": "Some Text For insurance info",
+									"type": "text"
+								},
+								{
+									"key": "maintenance_history",
+									"value": "Some Text For Mainenence History",
+									"description": "Some Text For Mainenence History",
+									"type": "text"
+								},
+								{
+									"key": "vehicle_owner",
+									"value": "197",
+									"description": "flat_owner_id",
+									"type": "text"
+								},
+								{
+									"key": "mileage",
+									"value": "20",
+									"description": "20 km per oil",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/vehicles",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vehicles List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vehicles?unique_user_id=priyangon_unique_7896456_ID",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vehicles"
+							],
+							"query": [
+								{
+									"key": "unique_user_id",
+									"value": "priyangon_unique_7896456_ID"
+								},
+								{
+									"key": "vehicle_owner",
+									"value": "198",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vin\":\"77778777\",\r\n    \"make_and_model\":\"teslaeff\",\r\n    \"license_plate_number\":\"12345\",\r\n    \"vehicle_type\":\"Car\",\r\n    \"year_of_manufacture\":\"2010-07-01\",\r\n    \"fuel_type\":2,//fuel's id\r\n    \"vehicle_status\":\"Ok\",\r\n    \"insurance_information\":\"feaeafefeafe\",\r\n    \"maintenance_history\":\"faefefafe\",\r\n    \"vehicle_owner\":197,//user's id\r\n    \"mileage\":\"20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/vehicles/12",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vehicles",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "Create Driver",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Md.sam",
+									"type": "text"
+								},
+								{
+									"key": "contact_info",
+									"value": "0140103301",
+									"type": "text"
+								},
+								{
+									"key": "driving_experience",
+									"value": "2 years",
+									"type": "text"
+								},
+								{
+									"key": "driver_identification_number",
+									"value": "XX-1234567095-1",
+									"type": "text"
+								},
+								{
+									"key": "training_qualifications",
+									"value": "Some Information about traning Qualification",
+									"type": "text"
+								},
+								{
+									"key": "vehicle_assignment",
+									"value": "13",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/drivers",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"drivers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Driver List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/drivers?unique_user_id=priyangon_unique_7896456_ID",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"drivers"
+							],
+							"query": [
+								{
+									"key": "unique_user_id",
+									"value": "priyangon_unique_7896456_ID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fuel",
+			"item": [
+				{
+					"name": "Create Fuel",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fuel_name",
+									"value": "Gas",
+									"type": "text"
+								},
+								{
+									"key": "fuel_current_price",
+									"value": "80",
+									"type": "text"
+								},
+								{
+									"key": "fuel_measurement",
+									"value": "kilograms",
+									"description": "liters, gallons, or kilograms.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/fuels",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"fuels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Fuel Listy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/fuels",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"fuels"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fleet Expense",
+			"item": [
+				{
+					"name": "Fleet Expense",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fleet_expense_date",
+									"value": "2023-05-08",
+									"type": "text"
+								},
+								{
+									"key": "fleet_expense_type",
+									"value": "maintenence",
+									"description": "fuel,insurence,depreciation,license_registration,tolls,fines,parking,cleaning,detailing",
+									"type": "text"
+								},
+								{
+									"key": "fleet_expense_amount",
+									"value": "2000",
+									"type": "text"
+								},
+								{
+									"key": "fuel_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "approximate_coverage",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "claimed_coverage",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "difference_coverage",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "fleet_expense_note",
+									"value": "this for fuel expense",
+									"type": "text"
+								},
+								{
+									"key": "owner_id",
+									"value": "186",
+									"type": "text"
+								},
+								{
+									"key": "created_by",
+									"value": "186",
+									"type": "text"
+								},
+								{
+									"key": "fleet_vehicle",
+									"value": "11",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/fleet",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"fleet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fleet Expense List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/fleet?created_by=186&fleet_expense_date=2023-05-08&fleet_expense_type=maintenece",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"fleet"
+							],
+							"query": [
+								{
+									"key": "created_by",
+									"value": "186"
+								},
+								{
+									"key": "fleet_expense_date",
+									"value": "2023-05-08"
+								},
+								{
+									"key": "fleet_expense_type",
+									"value": "maintenece"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Parking",
+			"item": [
+				{
+					"name": "Create Parking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "parking_slot_fee",
+									"value": "500",
+									"type": "text"
+								},
+								{
+									"key": "payment_staus",
+									"value": "UNPAID",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "parking_slot_status",
+									"value": "OCCUPIED",
+									"description": "OCCUPIED,VACENT",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "vehicle",
+									"value": "11",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "created_by",
+									"value": "priyangon_unique_7896456_ID",
+									"type": "text"
+								},
+								{
+									"key": "parking_slot_name",
+									"value": "West 2B",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/parking",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"parking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List of Parkings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/parking?unique_user_id=priyangon_unique_7896456_ID",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"parking"
+							],
+							"query": [
+								{
+									"key": "unique_user_id",
+									"value": "priyangon_unique_7896456_ID"
+								},
+								{
+									"key": "parking_occupied_by",
+									"value": "197",
+									"disabled": true
+								},
+								{
+									"key": "parking_slot_status",
+									"value": "OCCUPIED",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "       {\r\n        \"parking_occupied_by\": 198,\r\n        \"parking_slot_status\": \"OCCUPIED\",\r\n        \"vehicle\": 13\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/parking/17",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"parking",
+								"17"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Parking Payment",
+			"item": [
+				{
+					"name": "Create Parking Payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/parking-payment",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"parking-payment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service",
+			"item": [
+				{
+					"name": "Service Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "service_request_from",
+									"value": "201",
+									"type": "text"
+								},
+								{
+									"key": "service_request_category",
+									"value": "Water tap",
+									"description": "Water tap,Shower,Toilet,Sink,Drainage,Water pressure,Water leaks,Water quality,Water meter,Boiler maintenance,Radiator issues,Sprinkler system,Watering schedule,Flooded area,Burst pipe,Ceiling leak",
+									"type": "text"
+								},
+								{
+									"key": "service_request_description",
+									"value": "Water Tap is not working",
+									"type": "text"
+								},
+								{
+									"key": "service_request_flat_no",
+									"value": "22",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/services",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Service List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/services?unique_user_id=priyangon_unique_7896456_ID",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"services"
+							],
+							"query": [
+								{
+									"key": "service_status",
+									"value": "CLEARED",
+									"disabled": true
+								},
+								{
+									"key": "unique_user_id",
+									"value": "priyangon_unique_7896456_ID"
+								},
+								{
+									"key": "user_id",
+									"value": "200",
+									"disabled": true
+								},
+								{
+									"key": "user_type",
+									"value": "RENTEE",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Service Request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"service_request_success_date\":\"2023-07-11\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/services/2",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"services",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Maintenance",
+			"item": [
+				{
+					"name": "New Maintenance Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "order_created_by",
+									"value": "197",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "Fire Safety and Emergency Services",
+									"description": "Fire Safety and Emergency Services,Elevator and Lift Maintenance,Landscaping and Exterior Maintenance,Waste Management,Parking and Garage Management,Health and Safety Compliance,Common Area Maintenance,Roof and Gutter Maintenance,Heating and Cooling System Maintenance,Electrical Safety,Security System Maintenance,Painting and Renovation,Fitness Center and Recreational Facilities,IT and Networking Services,Furniture and Equipment Repairs",
+									"type": "text"
+								},
+								{
+									"key": "main_description",
+									"value": "new required",
+									"type": "text"
+								},
+								{
+									"key": "date_reported",
+									"value": "2023-08-01",
+									"type": "text"
+								},
+								{
+									"key": "building_id",
+									"value": "25",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "",
+									"description": "Open, In Progress, Completed, Closed\t",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "date_completed",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "priority",
+									"value": "Medium",
+									"description": "Low, Medium, High, Urgent",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/maintenance",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"maintenance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Maintenance Order List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://building360.world/api/maintenance?unique_user_id=priyangon_unique_7896456_ID",
+							"protocol": "https",
+							"host": [
+								"building360",
+								"world"
+							],
+							"path": [
+								"api",
+								"maintenance"
+							],
+							"query": [
+								{
+									"key": "unique_user_id",
+									"value": "priyangon_unique_7896456_ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Maintenance Order Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "       {\r\n        \"main_status\": \"Closed\",\r\n        \"date_completed\": \"2023-08-08\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/maintenance/2",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"maintenance",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "All Invoice List",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Poll",
+			"item": [
+				{
+					"name": "Create Poll With Option",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"topic\":\"ASSOCIATION\",\r\n    \"objective\":\"What is your name?\",\r\n    \"created_by\":\"priyangon_unique_7896456_ID\",\r\n     \"poll_option_text\":[\r\n         {\r\n             \"poll_option_text\": \"armaan\"\r\n         },\r\n         {\r\n             \"poll_option_text\": \"Shemol\"\r\n         },\r\n         {\r\n             \"poll_option_text\": \"Raskib\"\r\n         }\r\n     ]\r\n\r\n\r\n\r\n}\r\n\r\n\r\n\r\n   \r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/polls",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"polls"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Polls",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/polls",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"polls"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Poll Wise Fetch",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/polls/get-pollswise-question/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"polls",
+								"get-pollswise-question",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Poll Answer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "answerd",
+									"value": "2",
+									"description": "poll_option_id , put ID",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/polls/get-pollswise-answer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"polls",
+								"get-pollswise-answer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://192.168.0.227:9000/api",
+			"type": "string"
+		}
+	]
+}

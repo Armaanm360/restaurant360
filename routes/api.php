@@ -23,7 +23,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::resource('account-transfer', Accounts\AccountTransferController::class);
+
+
 Route::get('account/balance-statement', 'Accounts\AccountsController@balance_statement');
+
+Route::get('account/list-of-accounts/{unique}', 'Accounts\AccountsController@listOfAccounts');
 Route::post('account/save-opening-balance', 'AccountTransactions\AccountTransactionsController@save_opening_balance');
 Route::get('search-account', function (Request $request) {
     return search_account($request->q);
@@ -75,14 +79,14 @@ Route::resource('suppliers', Suppliers\SuppliersController::class);
 
 
 
-Route::resource('invoice', invoice\invoiceController::class);
+Route::resource('invoice', Invoice\InvoiceController::class);
 
 
 
-Route::get('invoice/chef/{id}', 'invoice\invoiceController@show_chef_invoice');
+Route::get('invoice/chef/{id}', 'Invoice\InvoiceController@show_chef_invoice');
 
 
-Route::get('today-invoices', 'invoice\invoiceController@today_invoices');
+Route::get('today-invoices', 'Invoice\InvoiceController@today_invoices');
 
 
 Route::post('registration', 'Admin\UserRegistrationController@userRegisterController');
@@ -114,17 +118,17 @@ Route::get('stock', 'Common\CommonController@stock');
 
 
 
-Route::get('all-products/{created_by}', 'Products\ProductsController@allProductsGetUserWise');
+Route::get('all-products/{version}/{created_by}', 'Products\ProductsController@allProductsGetUserWise');
 
 
 Route::get('all-tables/{created_by}', 'Table\RestaurantTableController@allTableUserWise');
 
 
-Route::get('all-product-category/{created_by}', 'ProductCategory\ProductCategoryController@allProductCategory');
+Route::get('all-product-category/{created_by}/{version}', 'ProductCategory\ProductCategoryController@allProductCategory');
 
 
 //invoice list user wise
-Route::get('list-of-invoices/{invoice_created_by}', 'invoice\invoiceController@listOfALLInvoices');
+Route::get('list-of-invoices/{invoice_created_by}', 'Invoice\InvoiceController@listOfALLInvoices');
 
 //today invoices
-Route::get('list-of-today-invoices/{invoice_created_by}', 'invoice\invoiceController@today_invoices_api');
+Route::get('list-of-today-invoices/{invoice_created_by}', 'Invoice\InvoiceController@today_invoices_api');

@@ -2,7 +2,7 @@
 @section('content')
     @inject('dashboard', 'App\Models\Dashboard\Dashboard')
     <?php
-    $abc = $dashboard->get_today_profit();
+    //$abc = $dashboard->get_today_profit();
     // echo '<pre>';print_r($abc);die;
     ?>
 

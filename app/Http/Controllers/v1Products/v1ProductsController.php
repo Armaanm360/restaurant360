@@ -209,13 +209,24 @@ class v1ProductsController extends Controller
 
     public function productSearchGet(Request $request)
     {
-        $products = v1Products::where('v_product', Auth::user()->version)->where('product_created_by', Auth::user()->unique_user_id)->where('product_name', 'like', "%{$request->q}%")->get();
+
+        if (Auth::user()->version == 1) {
+            $products = v1Products::where('v_product', Auth::user()->version)->where('product_created_by', Auth::user()->unique_user_id)->where('product_name', 'like', "%{$request->q}%")->get();
+        } else {
+            $products = Product::where('product_created_by', Auth::user()->unique_user_id)->where('product_name', 'like', "%{$request->q}%")->get();
+        }
+
 
         $product_array = array();
         foreach ($products as $product) {
             $label = $product['product_name'] . '(' . $product['product_entry_id'] . ')';
             $value = intval($product['product_name']);
-            $code = intval($product['product_id']);
+            if (Auth::user()->version == 1) {
+                $code = intval($product['v1product_id']);
+            } else {
+                $code = intval($product['product_id']);
+            }
+
             $product_array[] = array("label" => $label, "value" => $value, "code" => $code);
         }
         $result = array('status' => 'ok', 'content' => $product_array);

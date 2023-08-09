@@ -9,13 +9,13 @@
 
         /*input {
 
-                                                                            height: 32px;
+                                                                                        height: 32px;
 
-                                                                            background: #fcfcfc;
-                                                                            border: 1px solid #aaa;
-                                                                            border-radius: 5px;
-                                                                            box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
-                                                                        }*/
+                                                                                        background: #fcfcfc;
+                                                                                        border: 1px solid #aaa;
+                                                                                        border-radius: 5px;
+                                                                                        box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+                                                                                    }*/
         .search input {
 
             height: 32px;
@@ -52,6 +52,13 @@
                                 href="{{ url('warehouse-branch-transfer') }}">Transfer</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Create Transfer (Warehouse to Branch)</li>
                     </ol>
+                </div>
+
+                <div class="col text-md-end">
+                    <a class="btn btn-primary" href="{{ url('warehouse-branch-transfer') }}"><i
+                            class="fa fa-list me-2"></i>List Transfer</a>
+                    {{-- <a class="btn btn-secondary" href="{{ 'agents/create' }}"><i class="fa fa-user me-2"></i>Create
+                        Agent</a> --}}
                 </div>
             </div> <!-- .row end -->
         </div>

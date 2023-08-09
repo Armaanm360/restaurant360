@@ -322,12 +322,21 @@
 
                 <tbody>
                     @foreach ($pos as $pos)
-                        <tr>
-                            <td>{{ $pos->food_item_name }}</td>
-                            <td>{{ $pos->quantity }}</td>
-                            <td class="price">{{ $pos->food_item_retail_price }}</td>
-                            <td class="price">{{ $pos->sub_total }}</td>
-                        </tr>
+                        @if (Auth::user()->version == 1)
+                            <tr>
+                                <td>{{ $pos->product_name }}</td>
+                                <td>{{ $pos->quantity }}</td>
+                                <td class="price">{{ $pos->product_retail_price }}</td>
+                                <td class="price">{{ $pos->sub_total }}</td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td>{{ $pos->food_item_name }}</td>
+                                <td>{{ $pos->quantity }}</td>
+                                <td class="price">{{ $pos->food_item_retail_price }}</td>
+                                <td class="price">{{ $pos->sub_total }}</td>
+                            </tr>
+                        @endif
                     @endforeach
                     @php
                         $vat = $pos_sale->vat_amount;
@@ -472,11 +481,18 @@
                 </thead>
 
                 <tbody>
-                    @foreach ($pos_chef as $pos_chef)
-                        <tr>
-                            <td>{{ $pos_chef->product_name }}</td>
-                            <td>{{ $pos_chef->quantity }}</td>
-                        </tr>
+                    @foreach ($pos_chef as $pos)
+                        @if (Auth::user()->version == 1)
+                            <tr>
+                                <td>{{ $pos->product_name }}</td>
+                                <td>{{ $pos->quantity }}</td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td>{{ $pos->food_item_name }}</td>
+                                <td>{{ $pos->quantity }}</td>
+                            </tr>
+                        @endif
                     @endforeach
 
 

@@ -7,8 +7,11 @@ use App\Http\Resources\CommonResource;
 use App\Models\FoodIngredients;
 use App\Models\FoodItem;
 use App\Models\Ingredients\Ingredient;
+use App\Models\Kitchen\CreatedKitchenItems;
 use App\Models\Product\Product;
 use App\Models\ProductCategory\ProductCategory;
+use App\Models\Transfer\WarehouseToBranchItems;
+use App\Models\v1Products\v1Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -36,10 +39,25 @@ class ProductsController extends Controller
             return view('pages.products.list_products', $data);
         }
     }
-    public function allProductsGetUserWise($created_by)
+    public function allProductsGetUserWise($version, $created_by)
     {
+        $new_version  =   intval($version);
 
-        $data['productList'] = DB::table('created_food_items')->where('food_item_created_by', $created_by)->join('product_categories', 'product_categories.product_category_id', '=', 'created_food_items.foodt_item_category')->where('product_categories.product_category_created_by', $created_by)->get();
+        if ($new_version == 1) {
+            $data['productList'] = WarehouseToBranchItems::join('v1products', 'v1products.v1product_id', 'warehouse_to_branch_items.transfer_product_id')
+                ->where('warehouse_to_branch_items.transfer_product_available_balance', '>', 0)
+                ->where('v1products.v_product', $new_version)
+                ->where('v1products.product_created_by', $created_by)
+                ->groupBy('warehouse_to_branch_items.transfer_product_id')
+                ->select('v1products.v1product_id AS food_item_id', 'v1products.product_category As foodt_item_category', 'v1products.product_name AS  food_item_name', 'v1products.product_entry_id As food_item_entry_id', 'v1products.product_image As food_item_image', 'v1products.product_retail_price AS food_item_retail_price', 'v1products.product_status AS food_item_status', 'v1products.product_retail_price AS food_item_production_price', 'v1products.product_created_by AS food_item_created_by', 'warehouse_to_branch_items.created_at', 'warehouse_to_branch_items.updated_at')
+                ->get();
+        } else {
+            $data['productList'] = CreatedKitchenItems::where('food_item_created_by', $created_by)->get();
+        }
+
+
+
+
 
         return response()->json(['success' => true, 'message' => 'Successfully Done', 'data' => $data['productList']], 200);
     }
@@ -261,18 +279,30 @@ class ProductsController extends Controller
 
     public function searchTerm($created_by, Request $request)
     {
-        $mata = Product::where('product_created_by', $created_by)->select("product_name as value", "product_id", 'purchase_items.purchase_product_price', 'purchase_product_quantity', 'purchase_product_price', 'products.product_measure_status')
-            ->join('purchase_items', 'purchase_items.purchase_product_id', '=', 'products.product_id')
+        // $mata = Product::where('product_created_by', $created_by)->select("product_name as value", "product_id", 'purchase_items.purchase_product_price', 'purchase_product_quantity', 'purchase_product_price', 'products.product_measure_status')
+        //     ->join('purchase_items', 'purchase_items.purchase_product_id', '=', 'products.product_id')
+        //     ->get();
+
+
+        $mata = WarehouseToBranchItems::join('products', 'products.product_id', 'warehouse_to_branch_items.transfer_product_id')->join('purchase_items', 'purchase_items.purchase_product_id', '=', 'products.product_id')
+            ->where('warehouse_to_branch_items.transfer_product_available_balance', '>', 0)
+            ->where('products.product_created_by', Auth::user()->unique_user_id)
+            ->select("product_name as value", "product_id", 'purchase_items.purchase_product_price', 'purchase_items.purchase_product_quantity', 'purchase_items.purchase_product_price', 'products.product_measure_status', 'warehouse_to_branch_items.transfer_product_amount')
+            ->groupBy('products.product_name')
             ->get();
 
 
+        // echo '<pre>';
+        // print_r($mata);
 
 
 
 
-        $data = Product::select("product_name as value", "product_id", 'purchase_items.purchase_product_price', 'purchase_product_quantity', 'purchase_product_type', 'purchase_product_price')->join('purchase_items', 'purchase_items.purchase_product_id', '=', 'products.product_id')
-            ->where('product_created_by', 'LIKE', '%' . $request->get('search') . '%')
-            ->get();
+
+
+        // $data = Product::select("product_name as value", "product_id", 'purchase_items.purchase_product_price', 'purchase_product_quantity', 'purchase_product_type', 'purchase_product_price')->join('purchase_items', 'purchase_items.purchase_product_id', '=', 'products.product_id')
+        //     ->where('product_created_by', 'LIKE', '%' . $request->get('search') . '%')
+        //     ->get();
         return response()->json($mata);
     }
 

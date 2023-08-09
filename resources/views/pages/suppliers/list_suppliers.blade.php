@@ -1,6 +1,6 @@
 @extends('home')
 @section('content')
-<!-- Form section -->
+    <!-- Form section -->
     <!-- start: page toolbar -->
     <div class="page-toolbar px-xl-4 px-sm-2 px-0 py-3">
         <div class="container">
@@ -39,9 +39,9 @@
                                     <th>Supplier Name</th>
                                     <th>Phone</th>
                                     <th>Email</th>
-                                    <th>Branch</th>
+                                    {{-- <th>Branch</th> --}}
                                     <th>Supplier Entry ID</th>
-                                    <th>Opening Balance</th>
+                                    {{-- <th>Opening Balance</th> --}}
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -50,23 +50,22 @@
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>
-                                            @if($suppliers->supplier_image != null)
-                                            <img src="{{ asset('public').'/'.$suppliers->supplier_image }}" alt="" width="30px" height="30px">
+                                            @if ($suppliers->supplier_image != null)
+                                                <img src="{{ asset('public') . '/' . $suppliers->supplier_image }}"
+                                                    alt="" width="30px" height="30px">
                                             @endif
                                         </td>
                                         <td>{{ $suppliers->supplier_name }}</td>
                                         <td>{{ $suppliers->supplier_phone_number }}</td>
                                         <td>{{ $suppliers->supplier_email }}</td>
-                                        <td>{{ $suppliers->branch_id }}</td>
+                                        {{-- <td>{{ $suppliers->branch_id }}</td> --}}
                                         <td>{{ $suppliers->supplier_entry_id }}</td>
-                                        <td>{{ $suppliers->supplier_opening_balance }}</td>
+                                        {{-- <td>{{ $suppliers->supplier_opening_balance }}</td> --}}
                                         <td>
                                             <a href="{{ 'suppliers/' . $suppliers->supplier_id . '/' . 'edit' }}"
                                                 class="btn btn-sm btn-warning">Edit</a>
                                             <button class="btn btn-sm btn-danger"
                                                 onclick="deleteNow({{ $suppliers->supplier_id }})">Delete</button>
-                                            <a href="{{ 'suppliers/' . $suppliers->supplier_id }}"
-                                                class="btn btn-sm btn-info">View</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -83,52 +82,51 @@
 
 
     <script type="text/javascript">
+        function deleteNow(params) {
 
-function deleteNow(params) {
+            var isConfirm = confirm('Are You Sure!');
+            if (isConfirm) {
 
-var isConfirm = confirm('Are You Sure!');
-if (isConfirm) {
+                $('.loader').show();
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'DELETE',
+                    url: "suppliers" + '/' + params,
+                    success: function(data) {
+                        location.reload();
 
-$('.loader').show();
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            type: 'DELETE',
-            url: "suppliers" + '/' + params,
-            success: function(data) {
-                location.reload();
-
+                    }
+                }).done(function() {
+                    $("#success_msg").html("Data Save Successfully");
+                    //window.location.href = "{{ url('users') }}/";
+                    Swal.fire('Supplier Has Been Deleted', '', 'success')
+                }).fail(function(data, textStatus, jqXHR) {
+                    $('.loader').hide();
+                    var json_data = JSON.parse(data.responseText);
+                    $.each(json_data.errors, function(key, value) {
+                        $("#" + key).after(
+                            "<span class='error_msg' style='color: red;font-weigh: 600'>" +
+                            value +
+                            "</span>");
+                    });
+                });
+            } else {
+                $('.loader').hide();
             }
-        }).done(function() {
-            $("#success_msg").html("Data Save Successfully");
-            //window.location.href = "{{ url('users') }}/";
-            Swal.fire('Supplier Has Been Deleted', '', 'success')
-        }).fail(function(data, textStatus, jqXHR) {
-            $('.loader').hide();
-            var json_data = JSON.parse(data.responseText);
-            $.each(json_data.errors, function(key, value) {
-                $("#" + key).after(
-                    "<span class='error_msg' style='color: red;font-weigh: 600'>" +
-                    value +
-                    "</span>");
-            });
-        });
-} else {
-$('.loader').hide();
-}
 
 
 
 
-// })
-}
+            // })
+        }
 
         $(document).ready(function() {
-        $('#myTable')
-            .dataTable();
+            $('#myTable')
+                .dataTable();
 
 
-  });
+        });
     </script>
 @endsection

@@ -40,7 +40,7 @@
                                     <th>Category</th>
                                     <th class="text-danger">Production Price</th>
                                     <th class="text-info">Sell Price</th>
-                                    <th>Action</th>
+                                    {{-- <th>Action</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,12 +52,12 @@
                                         <td>{{ $product->product_category_name }}</td>
                                         <td>{{ $product->food_item_production_price }}</td>
                                         <td>{{ $product->food_item_retail_price }}</td>
-                                        <td>
+                                        {{-- <td>
                                             <button class="btn btn-sm btn-danger"
                                                 onclick="deleteNow({{ $product->food_item_id }})">Delete</button>
                                             <a href="{{ 'products/' . $product->food_item_id }}"
                                                 class="btn btn-sm btn-info">View</a>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
 

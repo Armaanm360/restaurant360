@@ -35,7 +35,7 @@ class InvoiceController extends Controller
 
 
 
-        $data['invoice'] = InvoicePosSale::where('invoice_has_deleted', 'NO')->join('staff', 'staff.staff_id', '=', 'invoice_pos_sales.staff_id')->join('clients', 'clients.client_id', '=', 'invoice_pos_sales.client_id')->latest('invoice_pos_sales.sale_id')->get();
+        $data['invoice'] = InvoicePosSale::where('invoice_has_deleted', 'NO')->where('invoice_created_by', Auth::user()->unique_user_id)->join('staff', 'staff.staff_id', '=', 'invoice_pos_sales.staff_id')->join('clients', 'clients.client_id', '=', 'invoice_pos_sales.client_id')->latest('invoice_pos_sales.sale_id')->get();
 
 
         // echo '<pre>';
@@ -69,21 +69,20 @@ class InvoiceController extends Controller
     {
         $data['accounts'] = Accounts::whereAccountHasDeleted('NO')->get();
         $data['delivery'] = DeliveryMan::all();
-        $data['branch'] = Branch::all();
+        $data['branch'] = Branch::where('branch_status', 1)->where('v_branch', Auth::user()->version)->where('branch_created_by', Auth::user()->unique_user_id)->get();
         $data['staff'] = Staff::whereStaffIsDeleted("NO")->get();
         $data['clients'] = \App\Models\Client\Client::whereClientIsDeleted("NO")->orderBy('client_id', 'desc')->get();
         // $data['product_cat'] =
         //     WarehouseToBranch::where('branch_id', Auth::user()->branch_id)->join('warehouse_to_branch_items', 'warehouse_to_branch_items.warehouse_to_branch_transfer_number', '=', 'warehouse_to_branches.warehouse_to_branch_transfer_number')->join('products', 'products.product_id', '=', 'warehouse_to_branch_items.transfer_product_id')->join('product_categories', 'product_categories.product_category_id', '=', 'products.product_category')->where('product_categories.product_category_is_deleted', '=', 'NO')->groupBy('products.product_category')->get();
-        $data['product_cat'] = ProductCategory::where('product_category_is_deleted', '=', 'NO')->groupBy('product_categories.product_category_name')->get();
+        $data['product_cat'] = ProductCategory::where('product_category_status', 1)->where('v_product_category', Auth::user()->version)->where('product_category_created_by', Auth::user()->unique_user_id)->get();
 
-
-        //    echo '<pre>';
-        //    print_r($data['product_cat']);die;
-
+        // echo '<pre>';
+        // print_r($data['product_cat']);
+        // die;
 
         // $data['product'] = WarehouseToBranch::join('warehouse_to_branch_items', 'warehouse_to_branch_items.warehouse_to_branch_transfer_number', '=', 'warehouse_to_branches.warehouse_to_branch_transfer_number')->join('products', 'products.product_id', '=', 'warehouse_to_branch_items.transfer_product_id')->groupBy('products.')->get();
 
-        $data['table'] = RestaurantTable::all();
+        $data['table'] = RestaurantTable::where('restaurant_table_status', 1)->where('restaurant_table_created_by', Auth::user()->unique_user_id)->get();
         return view('pages.invoice.create_invoice', $data);
     }
 
@@ -312,38 +311,39 @@ class InvoiceController extends Controller
     {
 
 
-        // $difference = DB::table('purchase_items')
-        //     ->leftJoin('used_quantity', 'purchase_items.purchase_product_id', '=', 'used_quantity.ingrident_id')
-        //     ->select('purchase_items.purchase_product_id', DB::raw('(used_quantity.used_quantity) - purchase_items.purchase_product_quantity as difference'))
-        //     ->get();
+        if (Auth::user()->version == 1) {
+            $data['pos'] = InvoicePosSale::where('sale_id', $id)
+                ->join('pos_sale_products', 'pos_sale_products.pos_sale_id', '=', 'invoice_pos_sales.sale_id')
+                ->join('v1products', 'v1products.v1product_id', '=', 'pos_sale_products.product_id')
+                ->get();
 
 
-        // $difference = DB::table('purchased_table')
-        //     ->leftJoin('used_table', 'purchased_table.ing_id', '=', 'used_table.ing_used_id')
-        //     ->select('purchased_table.ing_id', DB::raw('SUM(used_table.ing_used_quantity) - purchased_table.quantity as difference'))
-        //     ->groupBy('purchased_table.ing_id')
-        //     ->get();
+            // echo '<pre>';
+            // print_r($data['pos']);
+
+            // die;
+            $data['pos_sale'] = InvoicePosSale::where('sale_id', $id)
+                ->first();
+            $data['pos_chef'] = InvoicePosSale::where('sale_id', $id)->join('pos_sale_products', 'pos_sale_products.pos_sale_id', '=', 'invoice_pos_sales.sale_id')->join('v1products', 'v1products.v1product_id', '=', 'pos_sale_products.product_id')->get();
+
+            $data['client'] = InvoicePosSale::where('sale_id', $id)->join('clients', 'clients.client_id', '=', 'invoice_pos_sales.client_id')->first();
+        } else {
+            $data['pos'] = InvoicePosSale::where('sale_id', $id)
+                ->join('pos_sale_products', 'pos_sale_products.pos_sale_id', '=', 'invoice_pos_sales.sale_id')
+                ->join('created_food_items', 'created_food_items.food_item_id', '=', 'pos_sale_products.product_id')
+                ->get();
 
 
-        $data['pos'] = InvoicePosSale::where('sale_id', $id)
-            ->join('pos_sale_products', 'pos_sale_products.pos_sale_id', '=', 'invoice_pos_sales.sale_id')
-            ->join('created_food_items', 'created_food_items.food_item_id', '=', 'pos_sale_products.product_id')
-            ->get();
+            $data['pos_sale'] = InvoicePosSale::where('sale_id', $id)
+                //                ->join('restaurant_tables','restaurant_tables.restaurant_table_id','=', 'pos_sale_products.restaurant_table_id')
+                ->first();
+            $data['pos_chef'] = InvoicePosSale::where('sale_id', $id)->join('pos_sale_products', 'pos_sale_products.pos_sale_id', '=', 'invoice_pos_sales.sale_id')->join('created_food_items', 'created_food_items.food_item_id', '=', 'pos_sale_products.product_id')->get();
+
+            $data['client'] = InvoicePosSale::where('sale_id', $id)->join('clients', 'clients.client_id', '=', 'invoice_pos_sales.client_id')->first();
+        }
 
 
-        $data['pos_sale'] = InvoicePosSale::where('sale_id', $id)
-            //                ->join('restaurant_tables','restaurant_tables.restaurant_table_id','=', 'pos_sale_products.restaurant_table_id')
-            ->first();
-        $data['pos_chef'] = InvoicePosSale::where('sale_id', $id)->join('pos_sale_products', 'pos_sale_products.pos_sale_id', '=', 'invoice_pos_sales.sale_id')->join('created_food_items', 'created_food_items.food_item_id', '=', 'pos_sale_products.product_id')->get();
 
-        $data['client'] = InvoicePosSale::where('sale_id', $id)->join('clients', 'clients.client_id', '=', 'invoice_pos_sales.client_id')->first();
-
-
-        // $difference = DB::table('purchased_table')
-        //     ->leftJoin('used_table', 'purchased_table.ing_id', '=', 'used_table.ing_used_id')
-        //     ->select('purchased_table.ing_id', DB::raw('SUM(used_table.ing_used_quantity) - purchased_table.quantity as difference'))
-        //     ->groupBy('purchased_table.ing_id')
-        //     ->get();
 
 
 

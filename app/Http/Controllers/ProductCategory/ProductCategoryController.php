@@ -29,10 +29,16 @@ class ProductCategoryController extends Controller
             return view('pages.productcategory.list_product_category', $data);
         }
     }
-    public function allProductCategory($created_by)
+    public function allProductCategory($created_by, $v_product_category)
     {
 
-        $data['product_categoryList'] = ProductCategory::where('product_category_status', 1)->where('v_product_category', Auth::user()->version)->where('product_category_created_by', $created_by)->get();
+
+        if (isAPIRequest()) {
+            $data['product_categoryList'] = ProductCategory::where('product_category_status', 1)->where('v_product_category', $v_product_category)->where('product_category_created_by', $created_by)->get();
+        } else {
+            $data['product_categoryList'] = ProductCategory::where('product_category_status', 1)->where('v_product_category', Auth::user()->version)->where('product_category_created_by', $created_by)->get();
+        }
+
 
         return response()->json(['success' => true, 'message' => 'Successfully Done', 'data' => $data['product_categoryList']], 200);
     }

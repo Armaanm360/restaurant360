@@ -29,6 +29,7 @@ class PurchasesController extends Controller
             ->join('warehouses', 'purchases.purchase_warehouse_id', 'warehouses.warehouse_id')
             ->select('purchases.*', 'suppliers.supplier_name', 'warehouses.warehouse_name')
             ->where('purchases.purchase_status', 1)
+            ->where('purchase_created_by', Auth::user()->unique_user_id)
             ->orderBy('purchases.purchase_id', 'desc')
             ->get());
 
@@ -152,6 +153,8 @@ class PurchasesController extends Controller
         $supplier_transaction->supplier_transaction_last_balance = get_client_current_balance_by_client_id($request->purchase_supplier_id);
         $supplier_transaction->supplier_transaction_date = date("Y-m-d");
         $supplier_transaction->save();
+
+
 
 
         $supplier_transaction = $supplier_transaction->supplier_transaction_id;
@@ -351,6 +354,34 @@ class PurchasesController extends Controller
                 ->select('products.product_id', 'products.product_name', 'products.product_entry_id')
                 ->groupBy('products.product_id')
                 ->get();
+
+            $client_array = array();
+            foreach ($clients as $client) {
+                $productId = $client->product_id;
+                $productpurchaseQuantity = PurchaseItems::where('purchase_product_id', $productId)->where('warehouse_id', $request->q)->sum('purchase_product_quantity');
+                $productreturnQuantity = PurchaseReturnItems::where('purchase_product_id', $productId)->where('warehouse_id', $request->q)->sum('purchase_product_return_quantity');
+                $producttransferQuantity = WarehouseToBranchItems::where('warehouse_id', $request->q)->where('transfer_product_id', $productId)->sum('transfer_product_amount');
+                $productQuantity = $productpurchaseQuantity - $productreturnQuantity - $producttransferQuantity;
+
+                $label = $client['product_name'] . '(' . $productQuantity . ')';
+                $value = intval($client['purchase_items_id']);
+                $item_id = $client['product_id'];
+                $items_detail = $client['product_name'];
+                $items_quantity = $productQuantity;
+                $items_price = $client['purchase_product_price'];
+                $client_array[] = array(
+                    "label" => $label, "value" => $value,
+
+                    'items_detail' => $items_detail,
+                    'items_quantity' => $items_quantity,
+                    'items_price' => $items_price,
+                    'items_id' => $item_id,
+                );
+            }
+
+            $result = array('status' => 'ok', 'content' => $client_array);
+            echo json_encode($result);
+            exit;
         }
 
 

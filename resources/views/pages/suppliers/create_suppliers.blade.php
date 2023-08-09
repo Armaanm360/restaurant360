@@ -1,7 +1,6 @@
-
- @extends('home')
- @section('content')
-<!-- Form section -->
+@extends('home')
+@section('content')
+    <!-- Form section -->
     <!-- start: page toolbar -->
     <div class="page-toolbar px-xl-4 px-sm-2 px-0 py-3">
         <div class="container-fluid">
@@ -14,7 +13,8 @@
                     </ol>
                 </div>
                 <div class="col text-md-end">
-                    <a class="btn btn-primary" href="{{ url('suppliers') }}"><i class="fa fa-list me-2"></i>List Suppliers</a>
+                    <a class="btn btn-primary" href="{{ url('suppliers') }}"><i class="fa fa-list me-2"></i>List
+                        Suppliers</a>
                     {{-- <a class="btn btn-secondary" href="{{ 'agents/create' }}"><i class="fa fa-user me-2"></i>Create
     Agent</a> --}}
                 </div>
@@ -54,8 +54,9 @@
 
                                 <div class="col-lg-4 col-md-6 col-sm-6">
                                     <span class="float-label">
-                                        <input type="number" class="form-control form-control-lg" id="supplier_phone_number"
-                                            placeholder="Supplier Phone" name="supplier_phone_number">
+                                        <input type="number" class="form-control form-control-lg"
+                                            id="supplier_phone_number" placeholder="Supplier Phone"
+                                            name="supplier_phone_number">
                                         <label class="form-label" for="supplier_phone_number">Supplier Phone</label>
                                     </span>
                                 </div>
@@ -73,21 +74,22 @@
                                         <label class="form-label" for="supplier_address">Supplier Address</label>
                                     </span>
                                 </div>
-                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                {{-- <div class="col-lg-4 col-md-6 col-sm-6">
                                     <span class="float-label">
                                         <input type="number" class="form-control form-control-lg" id="branch_id"
                                             placeholder="Branch" name="branch_id">
                                         <label class="form-label" for="branch_id">Branch</label>
                                     </span>
-                                </div>
+                                </div> --}}
                                 <div class="col-lg-4 col-md-6 col-sm-6">
                                     <span class="float-label">
-                                        <input class="form-control" type="file" id="filecheck" name="supplier_image" accept=".jpg,.png,.jpeg">
+                                        <input class="form-control" type="file" id="filecheck" name="supplier_image"
+                                            accept=".jpg,.png,.jpeg">
                                         <label class="form-label" for="supplier_image">Supplier Image</label>
                                     </span>
                                 </div>
 
-                                <div class="row mt-3">
+                                {{-- <div class="row mt-3">
                                     <div class="col-6">
                                         <label class="form-group float-label">
                                             <select class="form-control form-control-lg custom-select"
@@ -110,7 +112,7 @@
                                         </span>
                                     </div>
 
-                                </div>
+                                </div> --}}
 
 
 
@@ -187,12 +189,11 @@
 
         var uploadField = document.getElementById("filecheck");
 
-            uploadField.onchange = function() {
-                if(this.files[0].size > 2097152){
+        uploadField.onchange = function() {
+            if (this.files[0].size > 2097152) {
                 alert("File is too big!");
                 this.value = "";
-                };
             };
+        };
     </script>
-
 @endsection

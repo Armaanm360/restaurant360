@@ -17,10 +17,10 @@ class IngredientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($created_by)
+    public function index()
     {
 
-        $data['productList'] = Ingredient::where('product_created_by', $created_by)->where('product_status', 1)->get();
+        $data['productList'] = Ingredient::where('product_created_by', Auth::user()->unique_user_id)->where('product_status', 1)->get();
 
 
         if (isAPIRequest()) {

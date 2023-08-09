@@ -46,7 +46,7 @@ Route::resource('roles', Admin\RoleController::class)->middleware('auth');
 Route::resource('permissions', Admin\PermissionController::class)->middleware('auth');
 
 
-Route::resource('invoice', invoice\invoiceController::class)->middleware('auth');
+Route::resource('invoice', Invoice\InvoiceController::class)->middleware('auth');
 
 Route::resource('invoice-return', InvoiceReturn\invoiceReturnController::class)->middleware('auth');
 Route::get('invoice-return-sale/{sale_id}', 'InvoiceReturn\invoiceReturnController@invoiceReturnSale')->middleware('auth');
@@ -90,8 +90,8 @@ Route::get('purchases/purchase-list/{unique_user_id}', 'Purchases\PurchasesContr
 
 
 Route::get('get-purchase-id/{id}', 'Purchases\PurchasesController@purchaseId');
-Route::get('chef-quity/{id}', 'invoice\invoiceController@show_chef_invoice');
-Route::get('pos-invoice-get', 'invoice\invoiceController@pos_invoice_create');
+Route::get('chef-quity/{id}', 'Invoice\InvoiceController@show_chef_invoice');
+Route::get('pos-invoice-get', 'Invoice\InvoiceController@pos_invoice_create');
 Route::get('get-purchased-product-list', 'Purchases\PurchasesController@purchasedProducts');
 //Route::resource('receive-money', ReceiveMoney\ReceiveMoneyController::class)->middleware('auth');
 
@@ -314,7 +314,7 @@ Route::get('report/profit-loss', 'Reports\SalesReport\DateWiseTotalSalesControll
 
 Route::get('stock', 'Common\CommonController@stock')->middleware('auth');
 
-Route::get('privacy-policy', 'invoice\invoiceController@privacyPolicy');
+Route::get('privacy-policy', 'Invoice\InvoiceController@privacyPolicy');
 
 Route::post('view-report/get-date-wise-sales-report', 'Reports\SalesReport\DateWiseTotalSalesController@datewiseReport');
 

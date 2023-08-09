@@ -13,8 +13,7 @@
                     </ol>
                 </div>
                 <div class="col text-md-end">
-                    <a class="btn btn-primary" href="{{ url('products/') . Auth::user()->unique_user_id }}"><i
-                            class="fa fa-list me-2"></i>List Menu
+                    <a class="btn btn-primary" href="{{ url('products/') }}"><i class="fa fa-list me-2"></i>List Menu
                         Item</a>
                     {{-- <a class="btn btn-secondary" href="{{ 'agents/create' }}"><i class="fa fa-user me-2"></i>Create
     Agent</a> --}}
@@ -194,7 +193,7 @@
                     '<td><span data-row = "' + billing_row +
                     '" class="current_quan_' + billing_row +
                     '">' +
-                    ui.item.purchase_product_quantity +
+                    ui.item.transfer_product_amount +
                     '(IN ' + ui.item.product_measure_status + ')' +
                     '</span></td>' +
                     '<td><span data-row = "' + billing_row +

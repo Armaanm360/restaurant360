@@ -56,8 +56,6 @@
                                                 class="btn btn-sm btn-warning">Edit</a>
                                             <button class="btn btn-sm btn-danger"
                                                 onclick="deleteNow({{ $branch->branch_id }})">Delete</button>
-                                            <a href="{{ 'branch/' . $branch->branch_id }}"
-                                                class="btn btn-sm btn-info">View</a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -9,13 +9,13 @@
 
         /*input {
 
-                                                                                                    height: 32px;
+                                                                                                                            height: 32px;
 
-                                                                                                    background: #fcfcfc;
-                                                                                                    border: 1px solid #aaa;
-                                                                                                    border-radius: 5px;
-                                                                                                    box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
-                                                                                                }*/
+                                                                                                                            background: #fcfcfc;
+                                                                                                                            border: 1px solid #aaa;
+                                                                                                                            border-radius: 5px;
+                                                                                                                            box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+                                                                                                                        }*/
         .search input {
 
             height: 32px;
@@ -48,11 +48,17 @@
                     <ol class="breadcrumb bg-transparent mb-0">
                         <li class="breadcrumb-item"><a class="text-secondary" href="{{ url('') }}}">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item"><a class="text-secondary"
-                                href="{{ url('purchases/purchase-list/') . '/' . Auth::user()->unique_user_id }}">Purchase</a>
+                        <li class="breadcrumb-item"><a class="text-secondary" href="{{ url('purchases') }}">Purchase</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">Create Purchase</li>
                     </ol>
+                </div>
+
+                <div class="col text-md-end">
+                    <a class="btn btn-primary" href="{{ url('purchases') }}"><i class="fa fa-list me-2"></i>List
+                        Purchase</a>
+                    {{-- <a class="btn btn-secondary" href="{{ 'agents/create' }}"><i class="fa fa-user me-2"></i>Create
+                        Agent</a> --}}
                 </div>
             </div> <!-- .row end -->
         </div>
@@ -262,7 +268,7 @@
             <tr>
                 <td style="vertical-align: middle;">
                     <span class="item_details"></span>
-                    <input type="hidden" name="product_id_" value="" class="productID">
+                    <input type="hidden" name="product_id_" class="productID">
                 </td>
 
                 <td style="vertical-align: middle;" class="color_name">

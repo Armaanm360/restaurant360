@@ -7,6 +7,12 @@
                     <div class="card-header">
                         <h3> All Pos Sales</h3>
                     </div>
+                    <div class="col text-md-end">
+                        <a class="btn btn-primary" href="{{ url('invoice/create') }}"><i class="fa fa-list me-2"></i>Create
+                            Invoice</a>
+                        {{-- <a class="btn btn-secondary" href="{{ 'agents/create' }}"><i class="fa fa-user me-2"></i>Create
+                        Agent</a> --}}
+                    </div>
                     <div class="card-body">
                         <table id="myTable" class="table display dataTable table-hover" style="width:100%">
                             <thead>
@@ -34,10 +40,10 @@
                                         <td>
 
                                             @if ($invoice->invoice_return == 'NO')
-                                                <a href="{{ 'invoice/' . $invoice->sale_id . '/' . 'edit' }}"
-                                                    class="btn btn-sm btn-primary">Edit</a>
-                                                <a href="{{ 'invoice-return-sale/' . $invoice->sale_id }}"
-                                                    class="btn btn-sm btn-danger">Return</a>
+                                                {{-- <a href="{{ 'invoice/' . $invoice->sale_id . '/' . 'edit' }}"
+                                                    class="btn btn-sm btn-primary">Edit</a> --}}
+                                                {{-- <a href="{{ 'invoice-return-sale/' . $invoice->sale_id }}"
+                                                    class="btn btn-sm btn-danger">Return</a> --}}
                                             @endif
 
                                             {{-- <button class="btn btn-sm btn-warning"
@@ -46,8 +52,8 @@
                                                 class="btn btn-sm btn-info">View</a>
 
 
-                                            <button class="btn btn-sm btn-warning"
-                                                onclick="deleteNow({{ $invoice->sale_id }})">Delete</button>
+                                            {{-- <button class="btn btn-sm btn-warning"
+                                                onclick="deleteNow({{ $invoice->sale_id }})">Delete</button> --}}
                                         </td>
                                     </tr>
                                 @endforeach

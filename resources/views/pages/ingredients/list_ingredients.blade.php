@@ -38,7 +38,6 @@
                                     <th>Ingredient Name</th>
                                     <th>Ingredient Code</th>
                                     <th>Ingredient Measurement</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,8 +47,8 @@
                                         <td>{{ $product->product_name }}</td>
                                         <td>{{ $product->product_code }}</td>
                                         <td>{{ $product->product_measure_status }}</td>
-                                        <td>
-                                            {{-- <a href="{{ 'products/' . $product->product_id . '/' . 'edit' }}"
+                                        {{-- <td></td> --}}
+                                        {{-- <a href="{{ 'products/' . $product->product_id . '/' . 'edit' }}"
                                                 class="btn btn-sm btn-warning">Edit</a>
                                             <button class="btn btn-sm btn-danger"
                                                 onclick="deleteNow({{ $product->product_id }})">Delete</button>
@@ -57,7 +56,7 @@
                                                 class="btn btn-sm btn-info">View</a>
                                             <a href="{{ 'get-product-barcode/' . $product->product_id }}"
                                                 class="btn btn-sm btn-info">Barcode</a> --}}
-                                        </td>
+
                                     </tr>
                                 @endforeach
 

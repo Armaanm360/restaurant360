@@ -64,7 +64,7 @@ class WarehouseController extends Controller
         $warehouse->warehouse_phone_number = $request->warehouse_phone_number;
         $warehouse->warehouse_address = $request->warehouse_address;
         $warehouse->v_warehouse = Auth::user()->version;
-        $warehouse->created_at = date("Y/m/d");
+        $warehouse->created_at = date("Y-m-d");
         if (isAPIRequest()) {
             $warehouse->warehouse_created_by =  $request->created_by;
         } else {

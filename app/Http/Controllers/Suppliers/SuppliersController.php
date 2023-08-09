@@ -18,12 +18,10 @@ class SuppliersController extends Controller
      */
     public function index()
     {
-        $data['supplierList'] = Supplier::where('supplier_status', 1)->where('v_supplier', Auth::user()->version)->where('supplier_created_by', Auth::user()->unique_user_id)->get();
+        $data['supplierList'] = Supplier::where('supplier_status', 1)->where('supplier_is_deleted', 'NO')->where('v_supplier', Auth::user()->version)->where('supplier_created_by', Auth::user()->unique_user_id)->get();
         if (isAPIRequest()) {
-
             return response()->json(['success' => true, 'message' => 'Successfully Done', 'data' => $data['supplierList']], 200);
         } else {
-
             return view('pages.suppliers.list_suppliers', $data);
         }
     }
@@ -65,7 +63,7 @@ class SuppliersController extends Controller
 
             $supplier = new Supplier();
             $supplier->supplier_name = $request->supplier_name;
-            $supplier->branch_id = $request->branch_id;
+            // $supplier->branch_id = $request->branch_id;
             $supplier->supplier_entry_id = $request->supplier_entry_id;
             $supplier->supplier_email = $request->supplier_email;
             $supplier->supplier_phone_number = $request->supplier_phone_number;

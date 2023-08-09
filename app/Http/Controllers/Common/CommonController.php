@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\ExpenseHead\ExpenseHead;
 use App\Models\ExpenseSubhead\ExpenseSubHead;
 use App\Models\FoodItem;
+use App\Models\Kitchen\CreatedKitchenItems;
 use App\Models\ProductCategory\ProductCategory;
 use App\Models\Transfer\WarehouseToBranch;
+use App\Models\Transfer\WarehouseToBranchItems;
+use App\Models\v1Products\v1Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -91,54 +94,71 @@ class CommonController extends Controller
         $productArray =  $allCat->toArray();
 
 
-        if ($product_cat == 0) {
-            $transferd = DB::table('created_food_items')->where('food_item_created_by', Auth::user()->unique_user_id)
-                ->get();
-        } else {
+        if (Auth::user()->version == 1) {
+            if ($product_cat == 0) {
+                // $transferd = v1Products::where('v_product', Auth::user()->version)
+                //     ->where('product_created_by', Auth::user()->unique_user_id)
+                //     ->join('warehouse_to_branch_items', 'warehouse_to_branch_items.transfer_product_id', 'v1products.v1product_id')
+                //     ->where('v1products')
+                //     ->get();
 
-            // $transferd = WarehouseToBranch::where('branch_id', $branch_id)->join('warehouse_to_branch_items', 'warehouse_to_branch_items.warehouse_to_branch_transfer_number', '=', 'warehouse_to_branches.warehouse_to_branch_transfer_number')
-            //     ->join('products', 'products.product_id', '=', 'warehouse_to_branch_items.transfer_product_id')
-            //     ->where('products.product_category', $product_cat)
-            //     ->get();
+                $transferd = WarehouseToBranchItems::join('v1products', 'v1products.v1product_id', 'warehouse_to_branch_items.transfer_product_id')
+                    ->where('warehouse_to_branch_items.transfer_product_available_balance', '>', 0)
+                    ->where('v1products.v_product', Auth::user()->version)
+                    ->where('v1products.product_created_by', Auth::user()->unique_user_id)
+                    ->groupBy('warehouse_to_branch_items.transfer_product_id')
+                    ->get();
 
-            //for web only
-            $transferd = DB::table('created_food_items')->where('food_item_created_by', Auth::user()->unique_user_id)
-                ->where('created_food_items.foodt_item_category', $product_cat)
-                ->get();
-        }
+                // echo '<pre>';
+                // print_r($transferd);
+                // die;
+                // where('v_product', Auth::user()->version)
+                // ->where('product_created_by', Auth::user()->unique_user_id)
 
-        if (isAPIRequest()) {
-            return response()->json(['success' => 'true', 'message' => 'Successfully Done', 'data' => $transferd], 200);
-        } else {
-            $transferd_array = array();
-            $output = '';
-            $output .= '';
-            foreach ($transferd as $transferd) {
-                // $label = $transferd['food_item_name'] . '(' . $transferd['food_item_entry_id'] . ')';
-                // $value = intval($transferd['food_item_id']);
-                $item_id = $transferd->food_item_id;
-                $item_image = $transferd->food_item_image;
-                $items_detail = $transferd->food_item_name;
-                // $items_quantity = getBrnachCurrentStocks(
-                //     $transferd['warehouse_to_branch_transfer_number'],
-                //     $transferd['product_id'],
-                //     $branch_id
-                // );
-                $items_price = $transferd->food_item_retail_price;
-                // $transferd_array[] = array(
-                //     "label" => $label, "value" => $value,
-                //     'items_detail' => $items_detail,
-                //     'items_quantity' => $items_quantity,
-                //     'items_price' => $items_price,
-                //     'items_id' => $item_id,
-                //     'meow'     => 'meow'
-                // );
-                $urlget = url('/') . '/' . 'public/uploads/products/';
+            } else {
+                //for web only
+                $transferd = WarehouseToBranchItems::join('v1products', 'v1products.v1product_id', 'warehouse_to_branch_items.transfer_product_id')
+                    ->where('v1products.product_category', $product_cat)
+                    ->where('warehouse_to_branch_items.transfer_product_available_balance', '>', 0)
+                    ->where('v1products.v_product', Auth::user()->version)
+                    ->where('v1products.product_created_by', Auth::user()->unique_user_id)
+                    ->groupBy('warehouse_to_branch_items.transfer_product_id')
+                    ->get();
+            }
 
 
+            if (isAPIRequest()) {
+                return response()->json(['success' => 'true', 'message' => 'Successfully Done', 'data' => $transferd], 200);
+            } else {
+                $transferd_array = array();
+                $output = '';
+                $output .= '';
+                foreach ($transferd as $transferd) {
+                    // $label = $transferd['food_item_name'] . '(' . $transferd['food_item_entry_id'] . ')';
+                    // $value = intval($transferd['food_item_id']);
+                    $item_id = $transferd->v1product_id;
+                    $item_image = $transferd->product_image;
+                    $items_detail = $transferd->product_name;
+                    // $items_quantity = getBrnachCurrentStocks(
+                    //     $transferd['warehouse_to_branch_transfer_number'],
+                    //     $transferd['product_id'],
+                    //     $branch_id
+                    // );
+                    $items_price = $transferd->product_retail_price;
+                    // $transferd_array[] = array(
+                    //     "label" => $label, "value" => $value,
+                    //     'items_detail' => $items_detail,
+                    //     'items_quantity' => $items_quantity,
+                    //     'items_price' => $items_price,
+                    //     'items_id' => $item_id,
+                    //     'meow'     => 'meow'
+                    // );
+                    $urlget = url('/') . '/' . 'public/uploads/products/';
 
 
-                $output .= '<div class="col-lg-3 col-md-4 col-sm-12 fulldiv"><a href="#" class="meow" 
+
+
+                    $output .= '<div class="col-lg-3 col-md-4 col-sm-12 fulldiv"><a href="#" class="meow" 
                                                         item_id="' . $item_id . '"
                                                         item_name="' . $items_detail . '"
                                                         item_image="' . $item_image . '"
@@ -167,9 +187,87 @@ class CommonController extends Controller
                                             </div>
                                             </a>
                                         </div>';
+                }
+                return $output;
             }
-            return $output;
+        } else {
+            if ($product_cat == 0) {
+                // $transferd = WarehouseToBranchItems::join('products', 'products.v1product_id', 'warehouse_to_branch_items.transfer_product_id')
+                //     ->where('warehouse_to_branch_items.transfer_product_available_balance', '>', 0)
+                //     ->where('products.v_product', Auth::user()->version)
+                //     ->where('products.product_created_by', Auth::user()->unique_user_id)
+                //     ->groupBy('warehouse_to_branch_items.transfer_product_id')
+                //     ->get();
+                $transferd = CreatedKitchenItems::where('food_item_created_by', Auth::user()->unique_user_id)->get();
+            } else {
+                $transferd = CreatedKitchenItems::where('food_item_created_by', Auth::user()->unique_user_id)->where('foodt_item_category', $product_cat)->get();
+            }
+
+            if (isAPIRequest()) {
+                return response()->json(['success' => 'true', 'message' => 'Successfully Done', 'data' => $transferd], 200);
+            } else {
+                $transferd_array = array();
+                $output = '';
+                $output .= '';
+                foreach ($transferd as $transferd) {
+                    // $label = $transferd['food_item_name'] . '(' . $transferd['food_item_entry_id'] . ')';
+                    // $value = intval($transferd['food_item_id']);
+                    $item_id = $transferd->food_item_id;
+                    $item_image = $transferd->food_item_image;
+                    $items_detail = $transferd->food_item_name;
+                    // $items_quantity = getBrnachCurrentStocks(
+                    //     $transferd['warehouse_to_branch_transfer_number'],
+                    //     $transferd['product_id'],
+                    //     $branch_id
+                    // );
+                    $items_price = $transferd->food_item_retail_price;
+                    // $transferd_array[] = array(
+                    //     "label" => $label, "value" => $value,
+                    //     'items_detail' => $items_detail,
+                    //     'items_quantity' => $items_quantity,
+                    //     'items_price' => $items_price,
+                    //     'items_id' => $item_id,
+                    //     'meow'     => 'meow'
+                    // );
+                    $urlget = url('/') . '/' . 'public/uploads/products/';
+
+
+
+
+                    $output .= '<div class="col-lg-3 col-md-4 col-sm-12 fulldiv"><a href="#" class="meow" 
+                                                        item_id="' . $item_id . '"
+                                                        item_name="' . $items_detail . '"
+                                                        item_image="' . $item_image . '"
+                                                        items_price="' . $items_price . '"
+                                                        >
+                <div class="card product-card">
+                                                <div class="card-body">
+                                                    <div class="product-img text-center">
+                                                        <img src="' . $urlget . $item_image . '"class="img-fluid" alt="">
+                                                    </div>
+                                                    <div class="d-flex pt-3">
+                                                       <div class="p-2">
+                                                        <h6><a href="#" class="meow" 
+                                                        item_id="' . $item_id . '"
+                                                        item_name="' . $items_detail . '"
+                                                        item_image="' . $item_image . '"
+                                                        items_price="' . $items_price . '"
+                                                        ><strong class="text-capitalize proname">' . $items_detail . '</strong></h6>
+                                                        <h6 class="mb-0 proprice"> <mark>' . $items_price . ' ' . 'taka</mark>
+                                                        </h6>
+                                                       </div>
+                                                       <div class="ml-3">
+                                                       </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </a>
+                                        </div>';
+                }
+                return $output;
+            }
         }
+
 
 
 

@@ -84,7 +84,7 @@ class CompanyInfoController extends Controller
                 return ['errors' => $validator->errors()->first()];
             } else {
                 $validated = $validator->validated();
-                $validated['created_by'] = Auth::user()->id;
+                $validated['created_by'] = Auth::user()->unique_user_id;
                 $validated['company_status'] = 1;
                 $statement = CompanyInfo::create($validated);
                 return ['status' => 'okay'];
