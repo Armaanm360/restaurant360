@@ -19,9 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 
 Auth::routes();
 
@@ -328,3 +326,15 @@ Route::get('/check-gmail', 'Ingredients\IngredientsController@check');
 Route::get('/gmail-checker', 'Ingredients\IngredientsController@viewGmail');
 
 Route::get('/backup', 'BackupController@createAndDownloadBackup')->name('backup');
+
+
+
+Route::get('welcom', function () {
+    return view('welcome');
+});
+
+Route::get('test', 'BackupController@newMyEvent');
+
+Route::get('chef-order', 'Invoice\InvoiceController@chefWebOrder');
+
+Route::get('chef-order-update/{order_id}', 'Invoice\InvoiceController@updateOrderWeb');

@@ -6,9 +6,9 @@
 <body class="layout-1" data-luno="theme-blue">
     <!-- start: sidebar -->
 
-    @if (Auth::user()->id == 12)
+    {{-- @if (Auth::user()->id == 12)
         @include('layouts.admin.sidebar')
-    @endif
+    @endif --}}
 
     <!-- start: body area -->
     <div class="wrapper">

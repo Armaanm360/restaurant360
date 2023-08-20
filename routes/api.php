@@ -81,6 +81,10 @@ Route::resource('suppliers', Suppliers\SuppliersController::class);
 
 Route::resource('invoice', Invoice\InvoiceController::class);
 
+Route::get('chef-order/{user_unique}', 'Invoice\InvoiceController@chefOrder');
+
+Route::put('chef-order-update/{order_id}', 'Invoice\InvoiceController@updateOrder');
+
 
 
 Route::get('invoice/chef/{id}', 'Invoice\InvoiceController@show_chef_invoice');
@@ -132,3 +136,13 @@ Route::get('list-of-invoices/{invoice_created_by}', 'Invoice\InvoiceController@l
 
 //today invoices
 Route::get('list-of-today-invoices/{invoice_created_by}', 'Invoice\InvoiceController@today_invoices_api');
+
+
+//datewise purchase Report
+
+Route::get('datewise-purchase-report', 'Report\DatewisePurchaseController@dateWiseReport');
+
+Route::get('meow', 'Report\DatewisePurchaseController@meow');
+
+
+Route::get('test', 'BackupController@newMyEvent');

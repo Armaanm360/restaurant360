@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "60691481-34ce-4086-b367-2a7a18abe856",
+		"name": "Bergain Finder Max",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16112436",
+		"_collection_link": "https://martian-meadow-60797.postman.co/workspace/Team-Workspace~429768e4-6fe1-49f2-87d5-68574db3cd03/collection/16112436-60691481-34ce-4086-b367-2a7a18abe856?action=share&creator=16112436&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Air Ticket Search",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer T1RLAQJ1XkU8CLD82AKQBu1XOPTYruisc3D1tdVRKL8mwE8x0RBVYi2Taz4QaAA0QzPeAdsBAADginD4BhunUmbOrInjp5NHodmkLax1QGXyl3hmlfBNtYWKiqpI28XoZvJCyNoG7IMy2ee5N8qQ+1k5CyiZBShhU1f2u3E3c5woB3PSpYQmHCk6XhPRWC6Jub79TfRdpsdWnpCP/k3NDCu9vGNfw/8Dq4fKysvMacCWhWZjfeUYb0PEo5poBvO6IXYAlGBxiqYuIbGCEg/g4qMZ7NarCU4cnLKsPsjcsD+F4zT49+xd4cXYO14MCFQhSjcc7c7tb/ecLu0KZbjOcPTED53iSpN352ZXvKpVKnOYT8MOQ5dawqE*",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"OTA_AirLowFareSearchRQ\": {\r\n    \"OriginDestinationInformation\": [\r\n      {\r\n        \"DepartureDateTime\": \"2023-10-21T00:00:00\",\r\n        \"DestinationLocation\": {\r\n          \"LocationCode\": \"CXB\"\r\n        },\r\n        \"OriginLocation\": {\r\n          \"LocationCode\": \"DAC\"\r\n        },\r\n        \"RPH\": \"0\"\r\n      }\r\n    ],\r\n    \"POS\": {\r\n      \"Source\": [\r\n        {\r\n          \"PseudoCityCode\": \"F9CE\",\r\n          \"RequestorID\": {\r\n            \"CompanyName\": {\r\n              \"Code\": \"TN\"\r\n            },\r\n            \"ID\": \"1\",\r\n            \"Type\": \"1\"\r\n          }\r\n        }\r\n      ]\r\n    },\r\n    \"TPA_Extensions\": {\r\n      \"IntelliSellTransaction\": {\r\n        \"RequestType\": {\r\n          \"Name\": \"50ITINS\"\r\n        }\r\n      }\r\n    },\r\n    \"TravelPreferences\": {\r\n      \"TPA_Extensions\": {\r\n        \"DataSources\": {\r\n          \"ATPCO\": \"Enable\",\r\n          \"LCC\": \"Disable\",\r\n          \"NDC\": \"Disable\"\r\n        },\r\n        \"NumTrips\": {}\r\n      }\r\n    },\r\n    \"TravelerInfoSummary\": {\r\n      \"AirTravelerAvail\": [\r\n        {\r\n          \"PassengerTypeQuantity\": [\r\n            {\r\n              \"Code\": \"ADT\",\r\n              \"Quantity\": 4\r\n            }\r\n          ]\r\n        }\r\n      ],\r\n      \"SeatsRequested\": [\r\n        1\r\n      ]\r\n    },\r\n    \"Version\": \"4\"\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "{{rest_endpoint}}/v4/offers/shop",
+					"host": [
+						"{{rest_endpoint}}"
+					],
+					"path": [
+						"v4",
+						"offers",
+						"shop"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

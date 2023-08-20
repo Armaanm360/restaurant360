@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Invoice;
 
+use App\Events\AdminChefEvent;
+use App\Events\AdminChefEventV2;
+use App\Events\ChefOneEvent;
+use App\Events\MyEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CommonResource;
 use App\Models\Accounts\Accounts;
@@ -12,11 +16,13 @@ use App\Models\ClientTransaction\ClientTransaction;
 use App\Models\DeliveryMan\DeliveryMan;
 use App\Models\DeliveryVehicle\DeliveryVehicle;
 use App\Models\Invoice\InvoicePosSale;
+use App\Models\OrderInfo\OrderInfo;
 use App\Models\PosSaleProducts\PosSaleProduct;
 use App\Models\ProductCategory\ProductCategory;
 use App\Models\Staff\Staff;
 use App\Models\Table\RestaurantTable;
 use App\Models\Transfer\WarehouseToBranch;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -195,6 +201,8 @@ class InvoiceController extends Controller
 
 
 
+
+
         // $difference = DB::table('purchase_items')
         //     ->leftJoin('used_quantity', 'purchase_items.purchase_product_id', '=', 'used_quantity.ingrident_id')
         //     ->select('purchase_items.purchase_product_id', DB::raw('SUM(used_quantity.used_quantity) - purchase_items.purchase_product_quantity	 as difference'))
@@ -292,13 +300,40 @@ class InvoiceController extends Controller
 
         $client_ledger->save();
 
+
+        $order = new OrderInfo();
+        $order->invoice_id_get = $invoice_sale->sale_id;
+        if (isAPIRequest()) {
+            $order->order_created_by = $request->invoice_created_by;
+        } else {
+            $order->order_created_by = Auth::user()->unique_user_id;
+        }
+        $order->order_date = date("Y-m-d");
+        $order->order_type = $request->customer_type;
+        $order->ordert_status = 'PENDING';
+        $order->save();
+
+
+
+        if (isAPIRequest()) {
+            if ($request->version == 1) {
+                event(new ChefOneEvent('New Order Arrived'));
+            } else {
+            }
+        } else {
+            if (Auth::user()->version == 1) {
+                event(new ChefOneEvent('New Order Arrived'));
+            } else {
+                event(new MyEvent('New Order Arrived'));
+            }
+        }
+
+
+
+
         $data = new CommonResource($invoice_sale);
 
         return response()->json(['success' => true, 'message' => 'Successfully Done', 'data' => $data, 'sale_id' => $data->sale_id], 200);
-
-        // return response()->json([
-        //     'sale_id' => $invoice_sale->sale_id
-        // ]);
     }
 
     /**
@@ -611,6 +646,196 @@ class InvoiceController extends Controller
         return $output;
     }
 
+
+
+    public  function chefOrder($user_unique)
+    {
+        $check = User::where('unique_user_id', $user_unique)->get();
+        $version = $check[0]->version;
+
+
+        if ($version == 2) {
+            $order = OrderInfo::where('order_created_by', $user_unique)
+                ->join('invoice_pos_sales', 'invoice_pos_sales.sale_id', '=', 'order_info.invoice_id_get')
+                ->get();
+
+            $meow_data = [];
+
+            foreach ($order as $poll) {
+                $meow_data_new = [
+                    'order_id' => $poll->order_id,
+                    'order_status' => $poll->ordert_status,
+                    'invoice_no' => $poll->invoice_no,
+                    'order_type' => $poll->order_type,
+                ];
+
+                $suborder = OrderInfo::where('order_created_by', $user_unique)->where('order_id', $poll['order_id'])
+                    ->join('invoice_pos_sales', 'invoice_pos_sales.sale_id', '=', 'order_info.invoice_id_get')
+                    ->join('pos_sale_products', 'pos_sale_products.pos_sale_id', '=', 'invoice_pos_sales.sale_id')
+                    ->join('created_food_items', 'created_food_items.food_item_id', '=', 'pos_sale_products.product_id')
+                    ->select('food_item_name', 'quantity')
+                    ->get();
+
+                foreach ($suborder as $option) {
+                    $meow_data_new['food_items'][] = [
+                        'item ' => $option->food_item_name,
+                        'quantity ' => $option->quantity,
+                    ];
+                }
+
+                $meow_data[] = $meow_data_new;
+            }
+        } else {
+            $order = OrderInfo::where('order_created_by', $user_unique)
+                ->join('invoice_pos_sales', 'invoice_pos_sales.sale_id', '=', 'order_info.invoice_id_get')
+                ->get();
+
+            $meow_data = [];
+
+            foreach ($order as $poll) {
+                $meow_data_new = [
+                    'order_id' => $poll->order_id,
+                    'order_status' => $poll->ordert_status,
+                    'invoice_no' => $poll->invoice_no,
+                    'order_type' => $poll->order_type,
+                ];
+
+                $suborder = OrderInfo::where('order_created_by', $user_unique)->where('order_id', $poll['order_id'])
+                    ->join('invoice_pos_sales', 'invoice_pos_sales.sale_id', '=', 'order_info.invoice_id_get')
+                    ->join('pos_sale_products', 'pos_sale_products.pos_sale_id', '=', 'invoice_pos_sales.sale_id')
+                    ->join('v1products', 'v1products.v1product_id', '=', 'pos_sale_products.product_id')
+                    ->select('product_name', 'quantity', 'ordert_status', 'order_type')
+                    ->get();
+
+                foreach ($suborder as $option) {
+                    $meow_data_new['food_items'][] = [
+                        'item ' => $option->product_name,
+                        'quantity ' => $option->quantity,
+                    ];
+                }
+
+                $meow_data[] = $meow_data_new;
+            }
+        }
+
+
+        // join('poll_options', 'poll_options.get_poll_id', '=', 'poll_question.poll_id')
+        return response()->json(
+            ['success' => true, 'message' => 'Successfully Done', 'data' => $meow_data],
+            200
+        );
+    }
+
+
+    public function chefWebOrder()
+    {
+        $version = Auth::user()->version;
+        if ($version == 2) {
+            $order = OrderInfo::where('order_created_by', Auth::user()->unique_user_id)->where('ordert_status', 'PENDING')
+                ->join('invoice_pos_sales', 'invoice_pos_sales.sale_id', '=', 'order_info.invoice_id_get')
+                ->latest('order_info.created_at')->get();
+
+            if (count($order) > 0) {
+
+                foreach ($order as $poll) {
+                    $meow_data_new = [
+                        'order_id' => $poll->order_id,
+                        'order_status' => $poll->ordert_status,
+                        'invoice_no' => $poll->invoice_no,
+                        'created_at' => $poll->created_at,
+                    ];
+
+                    $suborder = OrderInfo::where('order_created_by', Auth::user()->unique_user_id)->where('order_id', $poll['order_id'])
+                        ->join('invoice_pos_sales', 'invoice_pos_sales.sale_id', '=', 'order_info.invoice_id_get')
+                        ->join('pos_sale_products', 'pos_sale_products.pos_sale_id', '=', 'invoice_pos_sales.sale_id')
+                        ->join('created_food_items', 'created_food_items.food_item_id', '=', 'pos_sale_products.product_id')
+                        ->select('food_item_name', 'quantity', 'ordert_status', 'order_type')
+                        ->get();
+
+
+                    foreach ($suborder as $option) {
+                        $meow_data_new['food_items'][] = [
+                            'item ' => $option->food_item_name,
+                            'quantity ' => $option->quantity,
+                        ];
+                    }
+
+                    $data['orders'][] = $meow_data_new;
+                }
+            } else {
+                $data['orders'] = [0];
+            }
+
+            return view('layouts.admin.chef', $data);
+        } else {
+            $order = OrderInfo::where('order_created_by', Auth::user()->unique_user_id)
+                ->join('invoice_pos_sales', 'invoice_pos_sales.sale_id', '=', 'order_info.invoice_id_get')->where('ordert_status', 'PENDING')
+                ->latest('order_info.created_at')->get();
+
+
+            if (count($order) > 0) {
+                foreach ($order as $poll) {
+                    $meow_data_new = [
+                        'order_id' => $poll->order_id,
+                        'order_status' => $poll->ordert_status,
+                        'invoice_no' => $poll->invoice_no,
+                        'created_at' => $poll->created_at,
+                    ];
+
+                    $suborder = OrderInfo::where('order_created_by', Auth::user()->unique_user_id)->where('order_id', $poll['order_id'])
+                        ->join('invoice_pos_sales', 'invoice_pos_sales.sale_id', '=', 'order_info.invoice_id_get')
+                        ->join('pos_sale_products', 'pos_sale_products.pos_sale_id', '=', 'invoice_pos_sales.sale_id')
+                        ->join('v1products', 'v1products.v1product_id', '=', 'pos_sale_products.product_id')
+                        ->select('product_name', 'quantity', 'ordert_status', 'order_type')
+                        ->get();
+
+                    foreach ($suborder as $option) {
+                        $meow_data_new['food_items'][] = [
+                            'item ' => $option->product_name,
+                            'quantity ' => $option->quantity,
+                        ];
+                    }
+
+                    $data['orders'][] = $meow_data_new;
+                }
+            } else {
+                $data['orders'] = [0];
+            }
+        }
+
+        return view('layouts.admin.chef_v1', $data);
+    }
+
+    public function updateOrder($orderId, Request $request)
+    {
+        OrderInfo::where('order_id', $orderId)->update(
+            [
+                'ordert_status' => 'FINISHED'
+            ]
+        );
+
+        return response()->json(['success' => 'true', 'message' => 'Successfully Updated'], 200);
+    }
+
+    public function updateOrderWeb($orderId)
+    {
+        OrderInfo::where('order_id', $orderId)->update(
+            [
+                'ordert_status' => 'FINISHED'
+            ]
+        );
+
+        if (Auth::user()->version == 2) {
+            event(new AdminChefEventV2('#' . $orderId . ' ' . 'Is Read To Serve'));
+        } else {
+            event(new AdminChefEvent('#' . $orderId . ' ' . 'Is Read To Serve'));
+        }
+
+
+
+
+        return response()->json(['success' => 'true', 'message' => 'Successfully Updated'], 200);
+    }
 
 
 

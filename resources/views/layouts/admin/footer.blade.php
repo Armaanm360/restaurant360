@@ -16,7 +16,7 @@
                 title="Crave360">Restaurant
                 360</a>, All Rights Reserved.</p>
         <a href="#" class="col-md-4 d-flex align-items-center justify-content-center my-3 my-lg-0 me-lg-auto">
-            <img src="{{ asset('public') }}/assets/img/m360ict.gif" alt="">
+            {{-- <img src="{{ asset('public') }}/assets/img/m360ict.gif" alt=""> --}}
         </a>
         <ul class="nav col-md-4 justify-content-center justify-content-lg-end">
             <li class="nav-item"><a href="#" target="_blank" class="nav-link px-2 text-muted">Contact Us</a></li>

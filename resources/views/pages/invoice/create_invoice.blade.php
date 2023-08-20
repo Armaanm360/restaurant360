@@ -960,7 +960,7 @@
                         <li class="card p-3 my-1 flex-row">
                             <form id="addClientForm" style="width: 100%">
                                 <div class="flex-fill ms-3">
-
+                                    <input type="text" value="{{ Auth::user()->version }}" name="version">
                                     <span class="float-label">
                                         <label for="clientNumber">Customer Name(optional)</label>
                                         <input type="text" class="form-control form-control-lg" id="addClientName"
