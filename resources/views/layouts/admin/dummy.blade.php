@@ -94,6 +94,24 @@
                                             </div>
                                         </a>
                                     </div>
+
+                                    <div class="colr">
+                                        <a href="{{ url('chef-order') }}">
+                                            <div class="card overflow-hidden">
+                                                <div class="card-body py-4">
+                                                    <img class="img-fluid"
+                                                        src="{{ asset('/') }}assets/img/restaurant/order-online.png"
+                                                        alt="Pos">
+
+                                                </div>
+                                                <div class="card-footer border-0">
+                                                    <h5 class="text-warning"><i class="fa fa-table"></i> Online Orders
+                                                    </h5>
+                                                    <span class="res-title">Online Orders</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
                                     <div class="col">
                                         @if (Auth::user()->version == 2)
                                             <a href="{{ url('products/create') }}">
@@ -368,6 +386,31 @@
                                     </div>
                                 </div>
                             @endif
+                            @if (Auth::user()->role == 15)
+                                <div class="container">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col text-center">
+                                            <a href="{{ url('chef-order') }}">
+                                                <div class="card overflow-hidden">
+                                                    <div class="card-body py-4">
+                                                        <img class="img-fluid"
+                                                            src="{{ asset('/') }}assets/img/restaurant/order-online.png"
+                                                            alt="Pos">
+
+                                                    </div>
+                                                    <div class="card-footer border-0">
+                                                        <h5 class="text-warning"><i class="fa fa-table"></i> Online
+                                                            Orders
+                                                        </h5>
+                                                        <span class="res-title">Online Orders</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
                         </div>
                     </div>
                 </div>

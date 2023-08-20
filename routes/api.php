@@ -142,6 +142,10 @@ Route::get('list-of-today-invoices/{invoice_created_by}', 'Invoice\InvoiceContro
 
 Route::get('datewise-purchase-report', 'Report\DatewisePurchaseController@dateWiseReport');
 
+Route::get('datewise-sale-report', 'Report\DatewiseSaleController@dateWiseReport');
+
+Route::get('stock-report', 'Report\stockReportController@stockReport');
+
 Route::get('meow', 'Report\DatewisePurchaseController@meow');
 
 

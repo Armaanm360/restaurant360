@@ -319,6 +319,7 @@ class InvoiceController extends Controller
             if ($request->version == 1) {
                 event(new ChefOneEvent('New Order Arrived'));
             } else {
+                event(new MyEvent('New Order Arrived'));
             }
         } else {
             if (Auth::user()->version == 1) {

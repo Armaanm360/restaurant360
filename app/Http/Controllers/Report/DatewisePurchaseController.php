@@ -25,14 +25,14 @@ class DatewisePurchaseController extends Controller
                 ->whereBetween('purchases.purchase_date', [$startDate, $endDate])
                 ->join('purchase_items', 'purchase_items.purchase_id', '=', 'purchases.purchase_id')->join('v1products', 'v1products.v1product_id', '=', 'purchase_items.purchase_product_id')
                 ->join('product_categories', 'product_categories.product_category_id', '=', 'v1products.product_category')
-                ->select('purchases.purchase_number', 'v1products.product_name', 'purchase_items.purchase_product_price', 'product_categories.product_category_name', 'purchase_items.purchase_product_quantity')->get();
-            $version_total = $data->sum('purchases.purchase_subtotal');
+                ->select('purchases.purchase_number', 'v1products.product_name', 'purchase_items.purchase_product_price', 'product_categories.product_category_name', 'purchase_items.purchase_product_quantity', 'purchase_items.purchase_product_total_price', 'purchases.purchase_date')->get();
+            $version_total = $data->sum('purchase_items.purchase_product_total_price');
         } else {
             $version = Purchase::where('purchase_created_by', $request->unique_user_id)
                 ->whereBetween('purchases.purchase_date', [$startDate, $endDate])
                 ->join('purchase_items', 'purchase_items.purchase_id', '=', 'purchases.purchase_id')->join('products', 'products.product_id', '=', 'purchase_items.purchase_product_id')
-                ->select('purchases.purchase_number', 'products.product_name', 'purchase_items.purchase_product_price', 'purchase_items.purchase_product_quantity')->get();
-            $version_total = $data->sum('purchases.purchase_subtotal');
+                ->select('purchases.purchase_number', 'products.product_name', 'purchase_items.purchase_product_price', 'purchase_items.purchase_product_quantity', 'purchase_items.purchase_product_total_price', 'purchases.purchase_date')->get();
+            $version_total = $data->sum('purchase_items.purchase_product_total_price');
         }
 
 
@@ -51,9 +51,5 @@ class DatewisePurchaseController extends Controller
             'totalPurchase' => $version_total,
         ];
         return response()->json(['message' => 'Successfull', 'success' => true, 'purchaseData' => $version, 'totalPurchase' => $version_total], 201);
-    }
-
-    function meow()
-    {
     }
 }
