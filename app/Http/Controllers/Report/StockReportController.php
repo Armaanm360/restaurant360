@@ -58,6 +58,7 @@ class StockReportController extends Controller
             ];
         }
 
+
         foreach ($purData as $productName => $purchasedItem) {
             if (isset($mergedData[$productName])) {
                 $mergedData[$productName]["in"] = $purchasedItem["pur_quantity"];
@@ -67,6 +68,10 @@ class StockReportController extends Controller
                     "in" => $purchasedItem["pur_quantity"]
                 ];
             }
+        }
+
+        foreach ($mergedData as &$quantities) {
+            $quantities["remaining"] = $quantities["in"] - $quantities["out"];
         }
 
 
@@ -87,6 +92,6 @@ class StockReportController extends Controller
 
 
 
-        return response()->json(['message' => 'Successfull', 'success' => true, 'bingi' => $mergedData], 201);
+        return response()->json(['message' => 'Successfull', 'success' => true, 'product_stock' => $mergedData], 201);
     }
 }
